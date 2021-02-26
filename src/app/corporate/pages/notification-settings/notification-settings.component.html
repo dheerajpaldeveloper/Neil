@@ -1,0 +1,138 @@
+<div class="container page" id="Trips">
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <a class="btn btn-outline-primary btn-md tripsbtn active-page"
+                            data-hover="/assets/images/caricongrey.png" data-unhover="/assets/images/caricon.png"
+                            style="float:left; margin-right:20px;"
+                            [routerLink]="['/', 'corporate', 'notification-settings']"
+                            id="drivertripsbtnicon">Notification Settings</a>
+
+                        <a class="btn btn-outline-primary btn-md tripsbtn txt-color-0 "
+                            data-hover="/assets/images/caricongrey.png" data-unhover="/assets/images/caricon.png"
+                            style="float:left; margin-right:20px;" [routerLink]="['/', 'corporate', 'notifications']"
+                            id="drivertripsbtnicon">My Notifications<img src="/assets/images/document1.png"
+                                style="padding-left:10px;" id="drivercariconbtn"></a>
+
+                    </div>
+
+                    <div class="col-md-4 pull-right">
+                        <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn" data-toggle="modal"
+                            data-target="#add_to_account">Add User</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tables
+    ================================================== -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+            </div>
+            <table class="table table-responsive trips desktop">
+                <thead>
+                    <tr class="frow">
+                        <th scope="col">ID </th>
+                        <th scope="col">Mobile Number</th>
+                        <th scope="col">Added On</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="Users.length > 0">
+
+                    <!-- ng-repeat="doc in Users track by $index" -->
+                    <tr *ngFor="let doc of Users;let i=index;">
+                        <td>{{doc.id}}</td>
+                        <td>{{doc.last4_digits}}</td>
+                        <td>{{doc.card_added_on}}</td>
+                        <td><a href="javascript:;" (click)="(!doc.default_card) ? setDefaultCard(doc.id) : doNothing() "
+                                class="callToAction" [ngClass]="{disabled : (doc.default_card==1)}"
+                                ng-disabled="doc.default_card">Make it Default</a></td>
+                        <td><a href="javascript:;" class="callToAction" (click)="deleteCard(doc)">Delete</a></td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="Users.length == 0">
+                    <tr>
+                        <td colspan="6" class="text-center">No Number Found</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="add_to_account" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="row modaltitle">
+                <div class="col-sm-12">
+                    <button type="button" class="close" data-dismiss="modal"
+                        style="font-size:32px;float:right;padding:5px;">&times;</button>
+                    <h5 id="mtitle" style="text-align: center;font-size: 19px;">Add User </h5>
+                </div>
+
+            </div>
+            <div class="modal-body ">
+                <div class="col-sm-12">
+                    <div class="row modalrow">
+                        <div class="col-sm-12 text-center">
+                            <input class="form-control text-center" [(ngModel)]="notification.add_mobile"
+                                placeholder="Enter your Mobile number" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 addbtn">
+                            <div class="btn-align">
+                                <button type="button" (click)="saveNumber()"
+                                    class="button submit btn btn-primary btn-md button-spacing">Save Number</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="show_cardError" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="row modaltitle">
+                <div class="col-sm-11 col-12">
+                    <button type="button" class="close" (click)="closeCard()" data-dismiss="modal"
+                        style="font-size:32px;float:right;padding:5px;">&times;</button>
+                </div>
+            </div>
+
+            <div class="modal-body ">
+                <div class="panel-body confirm-body" ng-show="cardAlert">
+                    <div class="col-sm-12 row text-center">
+
+                        <p>Please add new card before deletion of last card can proceed.</p>
+                        <hr class="confirm">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"><button data-dismiss="modal" (click)="closeCard()"
+                                class="btn btn-primary ride-confirm-btn ">Cancel</button></div>
+                        <div class="col-md-3 text-center"><button data-toggle="modal" (click)="closeCard()"
+                                data-target="#add_to_account" class="btn btn-primary ride-confirm-btn ">Yes, Add
+                                Card</button> </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

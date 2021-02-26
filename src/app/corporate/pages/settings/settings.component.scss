@@ -1,0 +1,83 @@
+
+    .switcher {
+        position: relative;
+        display: inline-block;
+        width: 90px;
+        height: 44px;
+        border-radius: 9px;
+    }
+
+
+    .switcher input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slidercheck {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #bbb;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 4px;
+    }
+
+    .slidercheck:before {
+        position: absolute;
+        content: "";
+        height: 36px;
+        width: 36px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input.checked+.slidercheck {
+        background-color: #1f8dc6;
+    }
+
+    input:focus+.slidercheck {
+        box-shadow: 0 0 1px #1f8dc6;
+    }
+
+    input.checked+.slidercheck:before {
+        -webkit-transform: translateX(46px);
+        -ms-transform: translateX(46px);
+        transform: translateX(46px);
+    }
+
+    .slidercheck .off {
+        display: block;
+        text-align: right;
+        color: black;
+        color: white;
+        padding: 7px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .slidercheck .on {
+        display: none;
+        color: white;
+        padding: 7px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    input.checked+.slidercheck .off {
+        display: none;
+    }
+
+    input.checked+.slidercheck .on {
+        display: block;
+    }
+    .tripsbtn{
+        font-weight: 600;
+    }

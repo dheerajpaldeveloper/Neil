@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="23px" viewBox="0 0 20 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: sketchtool 3.5.1 (25234) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_name</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="provider" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="02_register" sketch:type="MSArtboardGroup" transform="translate(-393.000000, -487.000000)" fill="#17A5DC">
+            <g id="Group" sketch:type="MSLayerGroup" transform="translate(341.000000, 186.000000)">
+                <g id="user_name" transform="translate(37.000000, 282.000000)" sketch:type="MSShapeGroup">
+                    <g id="icon_name" transform="translate(15.000000, 19.000000)">
+                        <g id="Group">
+                            <path d="M19.8723187,17.7328063 C19.8723187,13.7106719 15.4800817,10.4221344 10.040858,10.4221344 C4.60163432,10.4221344 0.209397344,13.7106719 0.209397344,17.7328063 C0.209397344,18.5928854 0.388151175,19.427668 0.771195097,20.2118577 C1.63942799,20.6671937 2.63534219,21.0719368 3.65679265,21.3754941 L3.65679265,18.7193676 L4.42288049,18.7193676 L4.42288049,21.5778656 C6.13381001,22.0079051 8.02349336,22.2608696 10.040858,22.2608696 C12.0582227,22.2608696 13.947906,22.0079051 15.6588355,21.5778656 L15.6588355,18.7193676 L16.4249234,18.7193676 L16.4249234,21.3754941 C17.4463739,21.0466403 18.442288,20.6671937 19.3105209,20.2118577 C19.6935649,19.4529644 19.8723187,18.6181818 19.8723187,17.7328063 L19.8723187,17.7328063 Z" id="Shape"></path>
+                            <ellipse id="Oval" cx="10.040858" cy="4.88221344" rx="4.92849847" ry="4.88221344"></ellipse>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

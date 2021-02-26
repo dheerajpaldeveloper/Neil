@@ -1,0 +1,117 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "assets/styles/customer-media.css";
+@import "assets/styles/main.css";
+@import "assets/styles/style.css";
+
+@font-face {
+    font-family: 'Poppins'; /*a name to be used later*/
+    src: url('assets/fonts//Poppins/Poppins-Regular.ttf'); /*URL to font*/
+}
+
+
+#forget {
+    color: #6b6b6b;
+}
+
+.pi{
+    font-family:'primeicons' !important;
+}
+
+.popup-main-content .signup_btn,
+.signup_btn {
+    margin-top: 13px;
+    position: relative;
+    float: left;
+    width: 80%;
+    background: #1f8dc6;
+    border-radius: 5px;
+    text-align: center;
+    color: #fff;
+    padding: 15px 0px 15px 0px;
+    background-image: linear-gradient(90deg, #234369 0%, #16243f 36%, #080514 100%);
+}
+
+/** country drop down css **/
+
+.iti {
+    position: relative;
+    display: inline-block;
+    width: 100% !important;
+}
+
+.iti__country-list {
+    max-width: 367px;
+    max-height: 150px;
+}
+
+#live-track-mobile-field .iti__country-list{
+    width: 230px!important;
+}
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-size: 1rem !important;
+    // font-family: "Open Sans", sans-serif !important;
+    font-family: 'Poppins', sans-serif!important;
+    font-weight: 400 !important;
+    // background-image: url("/assets/images/pattern.png");
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: #000000;
+}
+
+.mat-tab-label .mat-tab-label-content {
+    text-transform: uppercase;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.env {
+    position: fixed;
+    bottom: 50%;
+    padding: 15px;
+    color: #fff;
+    z-index: 999;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+    right: 0px;
+    background-color: #070811;
+    border-radius: 4px 0px 0px 4px;
+    text-transform: capitalize;
+}
+
+/****************************** PrimeNg Style Start *********************************/
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+    background: #328fd8 !important;
+    color: #ffffff !important;
+}
+
+/****************************** PrimeNg Style End *********************************/
+
+
+
+
+#toast-container>.toast-error {
+    background-image: none !important;
+}
+
+#toast-container>.toast-success {
+    background-image: none !important;
+}
+
+
+@media screen and (max-width: 1400px) {
+.iti input, .iti input[type=text], .iti input[type=tel] {
+   height: 32px;
+   font-size: 12px;
+}
+}

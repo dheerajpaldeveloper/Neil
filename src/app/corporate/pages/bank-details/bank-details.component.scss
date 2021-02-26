@@ -1,0 +1,117 @@
+.StripeElement {
+	background-color: white;
+	height: auto;
+	padding: 10px 12px;
+	border-radius: 4px;
+	border: 1px solid transparent;
+	box-shadow: 0 1px 3px 0 #e6ebf1;
+	-webkit-transition: box-shadow 150ms ease;
+	transition: box-shadow 150ms ease;
+  }
+  .form-check a:hover, .form-check a:active, .form-check a:focus{
+	  color: #007bff;
+  }
+  .StripeElement--focus {
+	box-shadow: 0 1px 3px 0 #cfd7df;
+  }
+  
+  .StripeElement--invalid {
+	border-color: #fa755a;
+  }
+  
+  .StripeElement--webkit-autofill {
+	background-color: #fefde5 !important;
+  }
+  
+  input#cardholder-name::placeholder {
+	   color: #aab7c4;
+  }
+  input#cardholder-name {
+	  background-color: white;
+	  height: auto;
+	  padding: 10px 12px;
+	  border-radius: 4px;
+	  border: 1px solid transparent;
+	  box-shadow: 0 1px 3px 0 #e6ebf1;
+	  -webkit-transition: box-shadow 150ms ease;
+	  transition: box-shadow 150ms ease;
+	  width: 96%;
+  }
+  
+  @media  (min-width: 767px){
+	  #add_to_account .col-md-6 label {
+		  margin-bottom: .4rem;
+		  margin-top: .5rem;
+	  }
+	  .mobile-only{
+		  display:none;
+	  }
+  }
+  
+  @media (max-width: 375px) and (min-width: 280px){
+	  .tripsbtn img {
+		  width: 17%;
+		  margin-left: 15px;
+	  }
+	  .adddocbtn {
+		  float: none !important;
+		  text-align: center;
+	  }
+  }
+  .errorMessage{
+  display: block;
+  color: red;
+  }
+  #add_to_account .btn-primary:not(:disabled):not(.disabled):active:focus,#add_to_account .btn-primary:not(:disabled):not(.disabled).active:focus, #add_to_account .show > .btn-primary.dropdown-toggle:focus {
+	  box-shadow: none;
+  
+  }
+  
+  .btn-outline-primary.active-page:not(:disabled):not(.disabled):active,.btn-outline-primary.active-page{
+	  color:#fff !important;
+  }
+  
+  .combodate {
+	  width: 100%;
+	  display: inline-block;
+  }
+  
+  select#time, select#state, select {
+	  -webkit-appearance: menulist;
+  
+  }
+  
+  select.day {
+	  width: 23%!important;
+	  text-align-last: center;
+  
+  }
+  select.month {
+	  width: 30%!important;
+	  text-align-last: center;
+  }
+  
+  select.year {
+	  width: 40%!important;
+	  text-align-last: center;
+	  margin-right: 0 !important;
+  }
+  
+  .combodate select {
+	  height: calc(2.90625rem + 2px);
+	  text-align: center;
+	  border-radius: 4px;
+	  border-color: #ccc;
+	  margin-right: 3%;
+  }
+  .trips3 thead th:first-child,.trips3 thead th,.trips3 tr td,.trips3 tr td:first-child{
+	  width:auto !important;
+  }
+  input[type="file"]{
+	  font-size: 14px;
+	  padding-left: 0;
+  }
+  
+.tripsbtn{
+    font-weight: 600;
+}

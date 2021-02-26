@@ -1,0 +1,545 @@
+<div class="container page" id="Trips">
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <!-- <div class="row"> -->
+
+                <!-- <div class="col-md-10"> -->
+                <a class="btn btn-outline-primary btn-md tripsbtn " data-hover="assets/images/caricongrey.png"
+                    data-unhover="assets/images/caricon.png" style="float:left; margin-right:20px;"
+                    [routerLink]="['/', 'corporate', 'listCards']" id="drivertripsbtnicon">My Cards<img
+                        src="assets/images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+
+                <a class="btn btn-outline-primary btn-md tripsbtn active-page" *ngIf="driverDetails.subtype_id == 1"
+                    data-hover="images/caricongrey.png" data-unhover="assets/images/caricon.png"
+                    style="float:left; margin-right:20px;" [routerLink]="['/', 'corporate', 'bank-details']"
+                    id="drivertripsbtnicon">Bank Details<img src="assets/images/document1.png"
+                        style="padding-left:10px;" id="drivercariconbtn"></a>
+
+                <a class="btn btn-outline-primary btn-md tripsbtn " data-hover="images/caricongrey.png"
+                    data-unhover="images/caricon.png" style="float:left; margin-right:20px;"
+                    [routerLink]="['/', 'corporate', 'documents']" id="drivertripsbtnicon">My Documents<img
+                        src="assets/images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+
+                <a class="btn btn-outline-primary btn-md tripsbtn " data-hover="images/caricongrey.png"
+                    data-unhover="images/caricon.png" style="float:left; margin-right:20px;"
+                    [routerLink]="['/', 'corporate', 'staff']" id="drivertripsbtnicon">My Staff<img
+                        src="assets/images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+
+                <!-- <a class="btn btn-outline-primary btn-md tripsbtn active-page"
+                            style="float:left; margin-right:20px;" [routerLink]="['/', 'corporate', 'settings']"
+                            id="drivertripsbtnicon">More <i
+                                style=" font-size: 21px;    vertical-align: middle;    margin-left: 5px;"
+                                class="fa fa-cog"></i></a> -->
+                <!-- </div> -->
+                <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn desktop" data-toggle="modal"
+                    data-target="#add_to_account" *ngIf="Users == 'no bank details'">Add Bank Account</button>
+                <!-- *ngIf="Users == 'no bank details'" -->
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Tables
+		  ================================================== -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+            </div>
+            <table class="table table-responsive trips3 " style="display: table;">
+                <thead>
+                    <tr class="frow">
+                        <th scope="col">ID </th>
+                        <th scope="col">Bank Info</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="Users != 'no bank details'">
+                    <tr>
+                        <td>{{Users.id}}</td>
+                        <td>{{Users.bank_info }} </td>
+                        <td>{{Users.status}}</td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="Users == 'no bank details'">
+                    <tr>
+                        <td colspan="3" class="text-center">No Bank Account Found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 text-center" style="margin-left:25%">
+            <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn mobile mobile-only" data-toggle="modal"
+                data-target="#add_to_account">Add Bank Info</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add_to_account" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="row modaltitle">
+                <div class="col-sm-12 ">
+                    <button type="button" class="close" data-dismiss="modal"
+                        style="font-size:32px;float:right;padding:5px;">&times;</button>
+                    <h5 id="mtitle" style="text-align: center;">Add Bank Account </h5>
+                </div>
+
+            </div>
+            <div class="modal-body ">
+
+                <div class="col-sm-12">
+
+                    <div class="row modalrow">
+                        <div class="col-sm-12 text-left">
+
+                            <form name="AddAccount">
+
+                                <div class="row row-input">
+                                    <div class="col-md-12">
+                                        <h4>Basic Details</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>First Name<sup>*</sup></label>
+                                        <input readonly id="f_name" class="charvalue user-input form-control"
+                                            [(ngModel)]="fname" name="f_name" value="fname" type="text">
+                                        <!-- <span class="errorMessage"
+                                            [hidden]="!(AddAccount.f_name.$error.pattern && AddAccount.f_name.$touched)">First
+                                            Name can have only alphabets</span> -->
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>Last Name<sup>*</sup></label>
+                                        <input id="l_name" class="charvalue user-input form-control" name="l_name"
+                                            [(ngModel)]="lname" type="text" placeholder="Enter Last Name" readonly>
+                                        <!-- <span class="errorMessage"
+                                            [hidden]="!(AddAccount.l_name.$error.pattern && AddAccount.l_name.$touched)">Last
+                                            Name can have only alphabets</span> -->
+
+
+                                    </div>
+
+                                </div>
+                                <div class="row row-input">
+                                    <div class="col-md-6">
+                                        <label>Email<sup>*</sup></label>
+                                        <input readonly id="email" class="user-input form-control" [(ngModel)]="Email"
+                                            name="email" type="text" placeholder="Enter Email Id">
+                                        <!-- <span class="errorMessage"
+                                            [hidden]="!(AddAccount.email.$error.pattern && AddAccount.email.$touched)">Invalid
+                                            Email address.</span> -->
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>Phone Number<sup>*</sup></label>
+                                        <input id="PhoneNum" class="user-input form-control" name="PhoneNum"
+                                            [(ngModel)]="Phone" type="text" placeholder="Enter Phone Number" readonly>
+                                        <!-- <span class="errorMessage"
+                                            [hidden]="!(AddAccount.PhoneNum.$error.minlength)">Phone
+                                            Number should be valid</span> -->
+                                    </div>
+                                </div>
+
+                                <div class="row row-input">
+                                    <div class="col-md-6">
+                                        <label>SSN<sup>*</sup></label>
+                                        <input id="ssn_num" class="ssn form-control" type="text" name="ssn_num"
+                                            [(ngModel)]="ssn" maxlength="9" minlength="9"
+                                            onkeypress="return isNumberKey(event)" placeholder="Social Security Number"
+                                            required>
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.ssn_num.$error.required && AddAccount.ssn_num.$touched)">SSN
+                                            is required</span>
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.ssn_num.$error.minlength)">Please
+                                            enter valid SSN </span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>Date of Birth<sup>*</sup></label>
+                                        <input type="text" [(ngModel)]="dob" class="form-control input-field cal"
+                                            id="dob_user" data-format="YYYY-MM-DD" data-template="DD MMM YYYY"
+                                            name="dob_user" required>
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.dob_user.$error.required && AddAccount.dob_user.$touched)">DOB
+                                            is required</span>
+                                    </div>
+
+                                </div>
+
+                                <div class="row row-input">
+                                    <div class="col-md-6">
+                                        <label>Street Address<sup>*</sup></label>
+                                        <input required id="s_address" class="user-input form-control"
+                                            [(ngModel)]="address" name="s_address" type="text"
+                                            placeholder=" Street Address">
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.s_address.$error.required && AddAccount.s_address.$touched)">Street
+                                            Address is required</span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>Locality<sup>*</sup></label>
+                                        <input id="locality_user" class="user-input form-control" name="locality_user"
+                                            [(ngModel)]="locality" type="text" placeholder="Locality" required>
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.locality_user.$error.required && AddAccount.locality_user.$touched)">Locality
+                                            is required</span>
+                                    </div>
+
+                                </div>
+
+                                <div class="row row-input">
+
+                                    <div class="col-md-6 col-xs-6">
+                                        <label>Region<sup>*</sup></label>
+                                        <select id="region" [(ngModel)]="region" class="state form-control">
+                                            <option value="Alabama">Alabama</option>
+                                            <option value="Alaska">Alaska</option>
+                                            <option value="Arizona">Arizona</option>
+                                            <option value="Arkansas">Arkansas</option>
+                                            <option value="California">California</option>
+                                            <option value="Colorado">Colorado</option>
+                                            <option value="Connecticut">Connecticut</option>
+                                            <option value="Delaware">Delaware</option>
+                                            <option value="District Of Columbia">District Of Columbia</option>
+                                            <option value="Florida">Florida</option>
+                                            <option value="Georgia">Georgia</option>
+                                            <option value="Hawaii">Hawaii</option>
+                                            <option value="Idaho">Idaho</option>
+                                            <option value="Illinois">Illinois</option>
+                                            <option value="Indiana">Indiana</option>
+                                            <option value="Iowa">Iowa</option>
+                                            <option value="Kansas">Kansas</option>
+                                            <option value="Kentucky">Kentucky</option>
+                                            <option value="Louisiana">Louisiana</option>
+                                            <option value="Maine">Maine</option>
+                                            <option value="Maryland">Maryland</option>
+                                            <option value="Massachusetts">Massachusetts</option>
+                                            <option value="Michigan">Michigan</option>
+                                            <option value="Minnesota">Minnesota</option>
+                                            <option value="Mississippi">Mississippi</option>
+                                            <option value="Missouri">Missouri</option>
+                                            <option value="Montana">Montana</option>
+                                            <option value="Nebraska">Nebraska</option>
+                                            <option value="Nevada">Nevada</option>
+                                            <option value="New Hampshire">New Hampshire</option>
+                                            <option value="New Jersey">New Jersey</option>
+                                            <option value="New Mexico">New Mexico</option>
+                                            <option ng-selected="true" value="New York">New York</option>
+                                            <option value="North Carolina">North Carolina</option>
+                                            <option value="North Dakota">North Dakota</option>
+                                            <option value="Ohio">Ohio</option>
+                                            <option value="Oklahoma">Oklahoma</option>
+                                            <option value="Oregon">Oregon</option>
+                                            <option value="Pennsylvania">Pennsylvania</option>
+                                            <option value="Rhode Island">Rhode Island</option>
+                                            <option value="South Carolina">South Carolina</option>
+                                            <option value="South Dakota">South Dakota</option>
+                                            <option value="Tennessee">Tennessee</option>
+                                            <option value="Texas">Texas</option>
+                                            <option value="Utah">Utah</option>
+                                            <option value="Vermont">Vermont</option>
+                                            <option value="Virginia">Virginia</option>
+                                            <option value="Washington">Washington</option>
+                                            <option value="West Virginia">West Virginia</option>
+                                            <option value="Wisconsin">Wisconsin</option>
+                                            <option value="Wyoming">Wyoming</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-6 col-xs-6 ">
+                                        <label>Postal Code<sup>*</sup></label>
+                                        <input id="postal_user" class="zip form-control" type="text"
+                                            [(ngModel)]="postal" onkeypress="return isNumberKeys(event)"
+                                            name="postal_user" minlength="4" maxlength="6" inputmode="numeric"
+                                            placeholder="Postal code" required>
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.postal_user.$error.required && AddAccount.postal_user.$touched)">Postal
+                                            Code is required</span>
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.postal_user.$error.minlength)">Postal Code should be
+                                            valid</span>
+                                    </div>
+                                    <div class="col-md-12  mt-3 ">
+                                        <h4 class=""> <label>Account Type</label> </h4>
+                                        <select id="accountType" [(ngModel)]="accountType" class="state form-control">
+                                            <option ng-selected="true" value="1" label="Individual">1</option>
+                                            <option value="2" label="Company">2</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="row row-input">
+                                    <div class="col-md-6">
+                                        <label>Business Name<sup>*</sup></label>
+                                        <input id="Bussiness_Name" class="ssn form-control" type="text"
+                                            [(ngModel)]="BussinessName" name="Bussiness_Name"
+                                            placeholder="Enter Business Name" required>
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.Bussiness_Name.$error.required && AddAccount.Bussiness_Name.$touched)">Business
+                                            Name is required</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Mobile<sup>*</sup></label>
+                                        <input id="MobNum" class="tin form-control"
+                                            onkeypress="return isNumberKey(event)" type="text" minlength="10"
+                                            maxlength="10" [(ngModel)]="Mob" name="MobNum"
+                                            placeholder="Enter Mobile Number" required>
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.MobNum.$error.required && AddAccount.MobNum.$touched)">Mobile
+                                            Number is required</span>
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.MobNum.$error.minlength)">Mobile
+                                            Number should be valid</span>
+                                    </div>
+                                </div>
+                                <div class="row row-input">
+                                    <div class="col-md-6">
+                                        <label>Tax Id<sup>*</sup></label>
+                                        <input id="tax_id" class="form-control" [(ngModel)]="taxid" type="text"
+                                            name="tax_id" placeholder="Enter Tax Id" minlength="9" maxlength="9"
+                                            required>
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.tax_id.$error.required && AddAccount.tax_id.$touched)">Tax
+                                            Id is required</span>
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.tax_id.$error.minlength)">Please
+                                            Enter valid Tax Id</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Business Website<sup>*</sup></label>
+                                        <input id="bussiness_Web" class="form-control"
+                                            ng-pattern="/^[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/"
+                                            name="bussiness_Web" type="text" [(ngModel)]="bussinessWeb"
+                                            placeholder="Enter Business Website" required>
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.bussiness_Web.$error.required && AddAccount.bussiness_Web.$touched)">Business
+                                            Website is required</span>
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.bussiness_Web.$error.pattern && AddAccount.bussiness_Web.$touched)">Please
+                                            Enter valid Website Url</span>
+                                    </div>
+
+                                </div>
+                                <div class="row row-input">
+                                    <div class="col-md-6" [hidden]="!(accountType == 2)">
+                                        <label>Street Address<sup>*</sup></label>
+                                        <input id="saddress" ng-required="accountType == 2"
+                                            class="user-input form-control" [(ngModel)]="saddress" name="saddress"
+                                            type="text" placeholder=" Street Address">
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.saddress.$error.required && AddAccount.saddress.$touched)">Street
+                                            Address is required</span>
+                                    </div>
+                                    <div class="col-md-6" [hidden]="!(accountType == 2)">
+                                        <label>City<sup>*</sup></label>
+                                        <input id="city" ng-required="accountType == 2" class="user-input form-control"
+                                            [(ngModel)]="city" name="city" type="text" placeholder=" Enter City">
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.city.$error.required && AddAccount.city.$touched)">City
+                                            is required</span>
+                                    </div>
+                                </div>
+
+                                <div class="row row-input">
+                                    <div class="col-md-6" [hidden]="!(accountType == 2)">
+                                        <label>Country<sup>*</sup></label>
+                                        <input id="country" ng-required="accountType == 2"
+                                            class="user-input form-control" [(ngModel)]="country" name="country"
+                                            type="text" placeholder=" Country Name">
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.country.$error.required && AddAccount.country.$touched)">Country
+                                            Name is required</span>
+
+                                    </div>
+
+
+
+                                    <div class="col-md-6" [hidden]="!(accountType == 2)">
+                                        <label>Region<sup>*</sup></label>
+                                        <select id="bregion" [(ngModel)]="bregion" class="state form-control">
+                                            <option value="Alabama">Alabama</option>
+                                            <option value="Alaska">Alaska</option>
+                                            <option value="Arizona">Arizona</option>
+                                            <option value="Arkansas">Arkansas</option>
+                                            <option value="California">California</option>
+                                            <option value="Colorado">Colorado</option>
+                                            <option value="Connecticut">Connecticut</option>
+                                            <option value="Delaware">Delaware</option>
+                                            <option value="District Of Columbia">District Of Columbia</option>
+                                            <option value="Florida">Florida</option>
+                                            <option value="Georgia">Georgia</option>
+                                            <option value="Hawaii">Hawaii</option>
+                                            <option value="Idaho">Idaho</option>
+                                            <option value="Illinois">Illinois</option>
+                                            <option value="Indiana">Indiana</option>
+                                            <option value="Iowa">Iowa</option>
+                                            <option value="Kansas">Kansas</option>
+                                            <option value="Kentucky">Kentucky</option>
+                                            <option value="Louisiana">Louisiana</option>
+                                            <option value="Maine">Maine</option>
+                                            <option value="Maryland">Maryland</option>
+                                            <option value="Massachusetts">Massachusetts</option>
+                                            <option value="Michigan">Michigan</option>
+                                            <option value="Minnesota">Minnesota</option>
+                                            <option value="Mississippi">Mississippi</option>
+                                            <option value="Missouri">Missouri</option>
+                                            <option value="Montana">Montana</option>
+                                            <option value="Nebraska">Nebraska</option>
+                                            <option value="Nevada">Nevada</option>
+                                            <option value="New Hampshire">New Hampshire</option>
+                                            <option value="New Jersey">New Jersey</option>
+                                            <option value="New Mexico">New Mexico</option>
+                                            <option ng-selected="true" value="New York">New York</option>
+                                            <option value="North Carolina">North Carolina</option>
+                                            <option value="North Dakota">North Dakota</option>
+                                            <option value="Ohio">Ohio</option>
+                                            <option value="Oklahoma">Oklahoma</option>
+                                            <option value="Oregon">Oregon</option>
+                                            <option value="Pennsylvania">Pennsylvania</option>
+                                            <option value="Rhode Island">Rhode Island</option>
+                                            <option value="South Carolina">South Carolina</option>
+                                            <option value="South Dakota">South Dakota</option>
+                                            <option value="Tennessee">Tennessee</option>
+                                            <option value="Texas">Texas</option>
+                                            <option value="Utah">Utah</option>
+                                            <option value="Vermont">Vermont</option>
+                                            <option value="Virginia">Virginia</option>
+                                            <option value="Washington">Washington</option>
+                                            <option value="West Virginia">West Virginia</option>
+                                            <option value="Wisconsin">Wisconsin</option>
+                                            <option value="Wyoming">Wyoming</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row row-input">
+                                    <div class="col-md-6" [hidden]="!(accountType == 2)">
+                                        <label>Postal Code<sup>*</sup></label>
+                                        <input id="postalc" ng-required="accountType == 2" class="zip form-control"
+                                            [(ngModel)]="postalc" onkeypress="return isNumberKeys(event)" name="postalc"
+                                            minlength="4" maxlength="6" type="text" placeholder="Postal Code">
+
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.postalc.$error.required && AddAccount.postalc.$touched)">Postal
+                                            code is required</span>
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.postalc.$error.minlength && AddAccount.postalc.$touched)">Postal
+                                            code should be valid</span>
+
+                                    </div>
+                                </div>
+                                <div class="row row-input">
+                                    <div class="col-md-6 ">
+                                        <label style="cursor: pointer;">Upload the front Document (ID Proof) :</label>
+
+                                        <input type="file" accept="image/x-png,image/jpeg"
+                                            class="form-control form-control-lg upload tlc_img border-0"
+                                            name="file_source" image="image"
+                                            onchange="angular.element(this).scope().file_to_upload(this.files)"
+                                            data-button-text="Single" data-class-button="btn btn-default"
+                                            data-classinput="form-control inline" nv-file-select="" uploader="uploader"
+                                            id="mydocuploado">
+
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <label style="cursor: pointer;">Upload the back Document (ID Proof) :</label>
+
+                                        <input type="file" [(ngModel)]="mydocuploado1" accept="image/x-png,image/jpeg"
+                                            class="form-control form-control-lg upload tlc_img border-0"
+                                            name="file_source" image="image"
+                                            onchange="angular.element(this).scope().file_to_uploadB(this.files)"
+                                            data-button-text="Single" data-class-button="btn btn-default"
+                                            data-classinput="form-control inline" nv-file-select="" uploader="uploader"
+                                            id="mydocuploado1">
+
+                                    </div>
+
+                                </div>
+                                <div class="row row-input">
+                                    <div class="col-md-12">
+                                        <h4 class="mt-2">Account Details</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Account Number<sup>*</sup></label>
+                                        <input id="acc" class="form-control" [(ngModel)]="accNumber" type="text"
+                                            name="acc" placeholder="Enter Account Number" ng-pattern="/^[0-9]+$/"
+                                            onkeypress="return isNumberKeys(event)" required>
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.acc.$error.required && AddAccount.acc.$touched)">Account
+                                            Number is required</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Routing Number<sup>*</sup></label>
+                                        <input id="routing_Num" class="form-control" [(ngModel)]="routingNum"
+                                            type="text" name="routing_Num" placeholder="Enter Routing Number"
+                                            ng-pattern="/^[0-9]+$/" maxlength="9" required>
+                                        <span class="errorMessage"
+                                            [hidden]="!(AddAccount.routing_Num.$error.required && AddAccount.routing_Num.$touched)">Routing
+                                            Number is required</span>
+                                    </div>
+                                </div>
+                                <div class="row row-input">
+                                    <div class="form-check mt-2 ml-3">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" required [(ngModel)]="myCheckbox"
+                                                ng-change="someFunction(myCheckbox)" id="terms"
+                                                style="-webkit-appearance:checkbox;" class="form-check-input" value="">I
+                                            accept the <a href="https://stripe.com/us/legal" target="_blank">Terms of
+                                                service</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row row-input">
+                                    <div class="col-sm-4  mt-3 text-center">
+                                        <button style="min-width:100%" type="button" [disabled]="!AddAccount.$invalid"
+                                            (click)="sendBankDetails(AddAccount.$invalid)"
+                                            class="button submit btn btn-primary btn-md">Submit</button>
+                                    </div>
+                                </div>
+                                <div *ngIf="loading" class="loaders"> <span><img src="app/img/ring-alt.svg"></span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="show_cardError" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="row modaltitle">
+                            <div class="col-sm-11 col-12">
+                                <button type="button" class="close" (click)="closeCard()" data-dismiss="modal"
+                                    style="font-size:32px;float:right;padding:5px;">&times;</button>
+                            </div>
+                        </div>
+
+                        <div class="modal-body ">
+                            <div class="panel-body confirm-body" [hidden]="!cardAlert">
+                                <div class="col-sm-12 row text-center">
+
+                                    <p>Please add new bank account before deletion of last bank account can proceed.</p>
+                                    <hr class="confirm">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-3"><button data-dismiss="modal" (click)="closeCard()"
+                                            class="btn btn-primary ride-confirm-btn ">Cancel</button></div>
+                                    <div class="col-md-3 text-center"><button data-toggle="modal" (click)="closeCard()"
+                                            data-target="#add_to_account" class="btn btn-primary ride-confirm-btn ">Yes,
+                                            Add Account</button> </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>

@@ -1,0 +1,308 @@
+
+<div class="container page" id="Trips">
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+
+                <a class="btn btn-outline-primary btn-md tripsbtn " data-hover="assets/images/caricongrey.png"
+                    data-unhover="assets/images/caricon.png" style="float:left; margin-right:20px;"
+                    [routerLink]="['/', 'corporate', 'listCards']" id="drivertripsbtnicon">My Cards<img
+                        src="assets/images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+
+                <a class="btn btn-outline-primary btn-md tripsbtn " *ngIf="driverDetails.subtype_id == 1"
+                    data-hover="images/caricongrey.png" data-unhover="assets/images/caricon.png"
+                    style="float:left; margin-right:20px;" [routerLink]="['/', 'corporate', 'bank-details']"
+                    id="drivertripsbtnicon">Bank Details<img src="assets/images/document1.png"
+                        style="padding-left:10px;" id="drivercariconbtn"></a>
+
+                <a class="btn btn-outline-primary btn-md tripsbtn active-page" data-hover="images/caricongrey.png"
+                    data-unhover="images/caricon.png" style="float:left; margin-right:20px;"
+                    [routerLink]="['/', 'corporate', 'documents']" id="drivertripsbtnicon">My Documents<img
+                        src="assets/images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+
+                <a class="btn btn-outline-primary btn-md tripsbtn " data-hover="images/caricongrey.png"
+                    data-unhover="images/caricon.png" style="float:left; margin-right:20px;"
+                    [routerLink]="['/', 'corporate', 'staff']" id="drivertripsbtnicon">My Staff<img
+                        src="assets/images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+
+                <button class="btn btn-outline-primary btn-md tripsbtn nextclass"
+                    style="float:right; display:none">Next</button>
+
+                <!-- use this with ng if-->
+                <!-- <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn" *ngIf="(totalTypes>totalItems)"
+                    (click)="addDocDialog()" id="button" data-toggle="modal" data-target="#document_dialog">Add
+                    Documents</button> -->
+
+                    <!-- *ngIf="totalTypes>totalItems" -->
+                <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn" (click)="addDocDialog()" id="button"
+                    data-toggle="modal" data-target="#document_dialog" *ngIf="totalTypes>totalItems">Add
+                    Documents </button>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Tables
+      ================================================== -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+            </div>
+            <table class="table table-responsive trips desktop">
+                <thead>
+                    <tr class="frow">
+                        <th scope="col">ID</th>
+                        <th scope="col">Document Type</th>
+                        <th scope="col">Document</th>
+                        <th scope="col">Added on</th>
+                        <th scope="col">Expiry Date</th>
+                        <th scope="col">Status</th>
+                        <!--<th scope="col">Reminder Days</th>-->
+                    </tr>
+                </thead>
+                <tbody *ngIf="docs.length > 0">
+                    <!-- ng-repeat="doc in docs track by $index" -->
+                    <tr *ngFor="let doc of docs; let i=index;">
+                        <td>{{doc.doc_id}}</td>
+                        <td>{{doc.document_name}}</td>
+                        <td><img src="assets/images/doc.png" class="docimg">
+                            <ul class="nav navbar-nav ml-auto">
+                                <li class="nav-item dropdown tabledrop">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript(void)"
+                                        id="download">
+                                        <span class="caret"></span></a>
+                                    <div class="dropdown-menu user" aria-labelledby="download">
+                                        <a class="dropdown-item" (click)="viewDocDialog(doc,false)" data-toggle="modal"
+                                            data-target="#document_dialog_edit" href="javascript(void)">View</a>
+                                        <a class="dropdown-item" (click)="viewDocEditDialog(doc,true)"
+                                            data-toggle="modal" data-target="#document_dialog_edit"
+                                            href="javascript(void)">Edit</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>{{doc.date_added|date:'MMM dd yyyy,'}} <br>{{doc.date_added|date:'hh:mm a'}}</td>
+                        <td>{{doc.expiry_date|date:'MMM dd yyyy,'}} <br>{{doc.expiry_date|date:'hh:mm a'}}</td>
+                        <td *ngIf="doc.is_verified==1">
+                            <i class="fa fa-check-circle" style="color:#32CD32;font-size:18px;"></i>&nbsp; Verified
+                        </td>
+                        <td *ngIf="doc.is_verified==0"><i class="fa fa-exclamation-circle"
+                                style="color:#ea5d08; font-size:18px;"></i>&nbsp; Pending
+                        </td>
+                        <!--<td>{{doc.reminder_before}}</td>-->
+                    </tr>
+                </tbody>
+                <tbody *ngIf="docs.length == 0">
+                    <tr>
+                        <td colspan="6" class="text-center">No Documents Found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="document_dialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <h4>{{verifymsg}}</h4>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="row modaltitle">
+                <div class="col-sm-12 col-12">
+                    <button type="button" class="close" data-dismiss="modal"
+                        style="font-size:32px;float:right;padding:5px;" [disabled]="loading">&times;</button>
+                    <h5 id="mtitle" style="text-align: center;font-size: 19px;">Add Document</h5>
+                </div>
+            </div>
+            <div class="modal-body centered-text">
+
+                <div [hidden]="!(doc.successMsg)" class="alert alert-success text-center">{{doc.successMsg}}</div>
+                <div [hidden]="!(doc.errorMsg)" class="alert alert-danger text-center">{{doc.errorMsg}}</div>
+                <div class="row modalrow">
+                    <div class="col-sm-6 modalrowleft">
+                        <div>
+                            <a (click)="onFilePicker()" class='btn btn-default border uploaddoc mb-1'
+                                href='javascript:;' id="afterborder" style="cursor:pointer;">
+                                <i class="fa fa-paperclip mr-2 paperlink" aria-hidden="true"></i>
+                                <p style="cursor: pointer;padding-top: 8px;padding-bottom: 5px;">Upload new document
+                                    <br> as an attachment
+                                </p>
+                                <input type="file" accept="image/x-png,image/jpeg"
+                                    class="form-control form-control-lg upload tlc_img"
+                                    style='filter: alpha(opacity=0);opacity:0;margin-top:-71px;margin-left:-735px;width: 100%; display: block;'
+                                    name="file_source" image="image" (change)="file_to_upload($event.target.files)"
+                                    data-button-text="Single" data-class-button="btn btn-default"
+                                    data-classinput="form-control inline" nv-file-select="" uploader="uploader"
+                                    id="mydocupload">
+                                <p *ngIf="type==0" class="nowrap" style="margin-top: 20px;">{{doc.doc_file_name}}</p>
+                            </a>
+                            <!-- <div class="container mydocorhr">
+                                      <hr class="hrtext">
+                                          <p class="hrp">Or</p>
+                                    </div> 
+                                  <a ng-hide="captureImage" (click)="captureImage=true;doc.capturedImage=undefined" class='btn btn-default border capturedoc' style="cursor: pointer;">-->
+                            <!--<i class="fa fa-camera mr-2" aria-hidden="true"></i><p>Open Camera and <br>take a picture</p>-->
+                            <!--</a>-->
+                            <!--<img class="captured-image" ng-show="doc.capturedImage" src="{{doc.capturedImage}}" alt="captured image" >-->
+                            <!--<div *ngIf="captureImage && !editDoc">-->
+                            <!--<ng-webcam-->
+                            <!--config="camConfig"-->
+                            <!--on-load="onCameraLoad()"-->
+                            <!--on-error="onCameraCaptureError(err)"-->
+                            <!--on-capture-complete="onCameraCaptureComplete(src)">-->
+                            <!--</ng-webcam>
+                                        <input type="button" class="btn btn-primary btn-md mt-1 mb-1" value="Take Picture" (click)="takePicture()">
+                                   </div>-->
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 modalrowright">
+                        <label> Choose Document Type</label>
+                        <label *ngIf="type==1"> Document Type : {{docName}}</label>
+                        <div class="input-container">
+                            <i class="fa fa-pencil-square-o icon"></i>
+                            <!-- ng-options="documentType as documentType.document_name for documentType in documentTypes |  orderBy : '-document_type_id' track by documentType.document_type_id"
+                            ng-model="doc.docType" ng-change="typeSelect(doc.docType)" -->
+                            <select class="form-control" (change)="typeSelect($event.target.value)">
+                                <option value="">Select Document Type*</option>
+                                <option *ngFor="let documentType of documentTypes"
+                                    value="{{documentType.document_type_id}}">
+                                    {{documentType.document_name}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <label> Enter Expiry Date* of the Documents</label>
+                        <!--  <div class="input-container datepickercustom">
+                                <i class="fa fa-calendar icon"></i>
+                                <input class="input-field cal" accept="image/*" image="image" onchange="angular.element(this).scope().file_to_upload(this.files)" data-button-text="Single" data-class-button="btn btn-default" data-classinput="form-control inline" nv-file-select="" uploader="uploader"
+                                    class="form-control upload tlc_img" required data-errormessage="Please select a file"/>
+                              </div> -->
+
+                        <div class="input-container">
+                            <i class="fa fa-calendar icon"></i>
+                            <!--<input ng-disabled="!editDoc" type="text" ng-model="doc.expiry_date" class="form-control input-field cal" uib-datepicker-popup="{{format}}" ng-readonly='true' datepicker-options="dateOptions" is-open="popup.opened" close-text="Close" id="datepicker">-->
+                            <!-- <input type="text" [(ngModel)]="doc.expiry_date" class="form-control input-field cal"
+                                id="date" data-format="MM/DD/YYYY" data-template="MMM DD YYYY" name="date"> -->
+                            <ngx-combo-datepicker class="comboDate form-control" style="border:0px" order="mdy"
+                                placeholder="YYYY,MM,DD" id="date" name="date" [(ngModel)]="doc.expiry_date"
+                                minDate="2000-01-01" maxDate="2050-01-01">
+                            </ngx-combo-datepicker>
+                            <!-- <span class="input-group-btn" required>
+                                    <button type="button" class="btn btn-default" (click)="open()" style="height:31px"><i style="color:#209e91" class="fa fa-calendar"></i></button>
+                                </span> -->
+                        </div>
+                        <!--<div class="input-container">
+                                <i class="fa fa-clock-o icon" aria-hidden="true"></i>
+                                <input type="text" placeholder="Remind Duration (in Days)" class="form-control input-field cal" ng-model="doc.reminder_before" required="required" autocomplete="off">
+                              </div>-->
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 addbtn">
+                        <div class="btn-align">
+                            <!-- TODO -->
+                            <!-- [disabled]="submitText!='Submit'" -->
+                            <button type="submit" (click)="addEditDocType(doc,0)" class="btn btn-primary btn-md"
+                                style="border:1px solid #999;padding-top:10px;padding-bottom: 10px;">{{submitText}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="loading" class="loaders"> <span><img src="/assets/app-img/ring-alt.svg"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="document_dialog_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <h4>{{verifymsg}}</h4>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="row modaltitle">
+                <div class="col-sm-12 col-12">
+                    <button type="button" class="close" data-dismiss="modal"
+                        style="font-size:32px;float:right;padding:5px;" [disabled]="loading">&times;</button>
+                    <h5 id="mtitle" style="text-align: center;font-size: 19px;">Document Details</h5>
+                </div>
+            </div>
+            <h5 id="mtitle" class="mobile" style="text-align: center;font-size: 19px">{{doc.docTypeName}}</h5>
+            <div class="modal-body centered-text">
+                <div class="edit-modal-overlay" [hidden]="showUpdate"></div>
+                <div class="edit-modal-overlay-1" [hidden]="!showUpdate"></div>
+                <div [hidden]="!(doc.successMsg)" class="alert alert-success text-center">{{doc.successMsg}}</div>
+                <div [hidden]="!(doc.errorMsg)" class="alert alert-danger text-center">{{doc.errorMsg}}</div>
+                <div class="row modalrow">
+                    <div class="col-sm-6 modalrowleft">
+                        <img src="{{doc.document_url}}" alt="{{doc.docTypeName}}"
+                            style="width:50%;padding:10px 0;max-height: 100px" (click)="viewDocument(doc.document_url)">
+                        <p style="font-size: 16px;">{{doc.docTypeName}}</p>
+                        <div>
+                            <a (click)="onFilePicker()" class='btn btn-default border uploaddoc doccursor'
+                                href='javascript:;' id="afterbordero">
+                                <i class="fa fa-paperclip mr-2 paperlink" aria-hidden="true"></i>
+                                <p style="cursor: pointer;text-align: center;padding-top: 9px;padding-bottom: 5px;">
+                                    Upload new document <br> as an attachment
+                                </p>
+                                <input type="file" accept="image/x-png,image/jpeg"
+                                    class="form-control form-control-lg upload tlc_img"
+                                    style='filter: alpha(opacity=0);opacity:0;margin-top:-71px;margin-left:-735px;'
+                                    name="file_source" image="image" (change)="file_to_upload($event.target.files)"
+                                    data-button-text="Single" data-class-button="btn btn-default"
+                                    data-classinput="form-control inline" nv-file-select="" uploader="uploader"
+                                    id="mydocuploado">
+                                <p class="nowrap" style="margin-left:32px;margin-top: 20px;">{{doc.doc_file_name}}</p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 modalrowright">
+                        <label> Choose Document Type</label>
+                        <label *ngIf="type==1"> Document Type : {{docName}}</label>
+                        <div class="input-container">
+                            <i class="fa fa-pencil-square-o icon"></i>
+                            <!-- ng-options="documentType as documentType.document_name for documentType in documentTypes |  orderBy : '-document_type_id' track by documentType.document_type_id"
+                            ng-model="doc.docType" ng-change="typeSelect(doc.docType)" -->
+                            <select class="form-control" (change)="typeSelect($event.target.value)">
+                                <option value="">{{doc.docTypeName?doc.docTypeName:'Select Document Type*'}}</option>
+                                <!-- <option value="" >Select Document Type*</option>
+                                <option *ngFor="let documentType of documentTypes" value="{{doc.docTypeName}}">
+                                    {{doc.docTypeName}}
+                                </option> -->
+                            </select>
+                        </div>
+
+                        <label> Enter Expiry Date* of the Documents</label>
+
+                        <div class="input-container">
+                            <i class="fa fa-calendar icon"></i>
+                            <!-- <input type="text" [(ngModel)]="doc.expiry_date" class="form-control input-field cal"
+                                id="edate" data-format="MM/DD/YYYY" data-template="MMM DD YYYY" name="edate"> -->
+                            <ngx-combo-datepicker class="comboDate form-control" style="border:0px;" order="mdy"
+                                placeholder="YYYY,MM,DD" id="edate" name="edate" minDate="2000-01-01"
+                                maxDate="2030-01-01" [(ngModel)]="doc.expiry_date">
+                            </ngx-combo-datepicker>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 addbtn">
+                        <div class="btn-align">
+                            <button type="submit" (click)="editDocument(doc)" [disabled]="submitUpdate!='Update'"
+                                [hidden]="!showUpdate" class="btn btn-primary btn-md"
+                                style="border:1px solid #999;padding-top:10px;padding-bottom: 10px;">{{submitUpdate}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="loading" class="loaders"> <span><img src="/assets/app-img/ring-alt.svg"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="156px" height="156px" viewBox="0 0 156 156" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: sketchtool 3.4.4 (395) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_select_location</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="provider" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="01_landing_page" sketch:type="MSArtboardGroup" transform="translate(-329.000000, -1515.000000)">
+            <g id="icon_select_location" sketch:type="MSLayerGroup" transform="translate(332.000000, 1518.000000)">
+                <circle id="Oval-47" stroke="#5ECFFF" stroke-width="5" fill="#29ABE2" sketch:type="MSShapeGroup" cx="75" cy="75" r="75"></circle>
+                <path d="M75.4620581,35 C60.8708394,35 49,46.8708394 49,61.4618867 C49,67.3386672 52.752738,76.919834 60.4720242,90.7530295 C65.9323292,100.537033 71.3027892,108.695085 71.5284302,109.03749 L75.4620581,115 L79.3955146,109.037661 C79.621327,108.695085 84.99213,100.537205 90.4517491,90.7532009 C98.1713782,76.919834 101.923773,67.3388386 101.923773,61.4620581 C101.923945,46.8708394 90.0531053,35 75.4620581,35 L75.4620581,35 Z M75.4620581,75 C67.8866266,75 61.7452838,68.8588287 61.7452838,61.2832257 C61.7452838,53.7076227 67.8866266,47.5664513 75.4620581,47.5664513 C83.0374897,47.5664513 89.1788324,53.7076227 89.1788324,61.2832257 C89.1788324,68.8588287 83.0373182,75 75.4620581,75 L75.4620581,75 Z" id="Shape" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

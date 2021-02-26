@@ -1,0 +1,71 @@
+.cconfirmation{
+    font-size:16px;
+    color: #7d7d7d;
+    margin-left: 22px;
+    margin-right: 22px;
+    line-height: 1.5;
+
+}
+
+button.ride-confirm-btn {
+    display: block;
+    font-size: 18px;
+    width: 100%;
+    padding: 15px 0px;
+}
+
+.fontStyle{
+    font-size: 30px;
+    font-weight: 400;
+}
+
+button.bak-buton {
+    text-align: right;
+    border-radius: 4px;
+    border: 1px solid #777;
+    font-size: 18px;
+    padding: 14px 59px;
+    min-width: 70px;
+    display: block;
+    float: right;
+}
+.popup-main-content .submit {
+    margin-bottom: 15px;
+}
+.popup-main-content input{
+    padding-top:16px;
+    padding-bottom: 16px;
+}
+.sign__content {
+    font-size: 14px;
+}
+.page.sign__content {
+    box-shadow: 1px 1px 7px 0px #888888;
+}
+
+.mandatory {
+    color: red;
+}
+
+@media (min-width: 1200px){
+.sign__content {
+    padding: 60px 90px;
+}
+}
+
+
+:host::ng-deep .iti input, .iti input[type=text], .iti input[type=tel] {
+  height: auto !important;
+  font-size: 16px;
+ }
+
+// @media (min-width: 992px){
+// .sign__content {
+//     padding: 45px 60px;
+// }
+// }
+// @media (min-width: 480px){
+// .sign__content {
+//     padding: 45px 35px; 
+// }
+// }

@@ -1,0 +1,240 @@
+<header class="header header--white">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="header__content">
+                    <a (click)="homelink()" class="header__logo">
+                        <img src="assets/img/logo--white.svg" alt='logo'>
+
+                        <!-- <object type="image/svg+xml" data="img/logo--white.svg"></object> -->
+                        <!-- <object type="image/svg+xml" data="img/logo--black.svg"></object> -->
+                        <!-- <object type="image/svg+xml" data="img/logo--white.svg"></object> -->
+                    </a>
+                    <nav class="header__nav">
+                        <!--<a href="driverlogin.html">Drive</a>
+                            <a href="riderlogin.html">Ride</a>-->
+                        <a href="javascript:;" (click)="startAgain()">Home</a>
+                        <div class="header__social">
+                            <a href="https://twitter.com/ridequdos"><i class="icon-tw"></i></a>
+                            <a href="https://www.facebook.com/QudosRide/"><i class="icon-fb"></i></a>
+                            <a href="https://www.linkedin.com/company/ridequdos/"><i class="icon-linkedin"></i></a>
+                            <a href="https://www.instagram.com/qudosride/"><i class="icon-instagram"></i></a>
+                        </div>
+                    </nav>
+                    <button class="header__menu" type="button">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="sign">
+    <div class="container" id="login_container">
+        <div class="row">
+            <div class="col-12 col-xl-10 offset-xl-1">
+                <div class="sign__content">
+                    <div class="row">
+                        <div class="popup-main-content">
+                            <!--Start Inner Row-->
+                            <div id="main-login" class="row"
+                                [hidden]="!(!otpVerified&&!forgotStarted&&!OTPStarted&&loginMode)">
+                                <div class="col-md-6">
+                                    <h3>Corporate Sign In</h3>
+                                    <span style="color: #212529;">Qudos creates the opportunity for our drivers to build
+                                        the business they truly want.</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="login-form">
+                                        <form name="sign-in" autocomplete="off">
+                                            <label>Mobile Number</label>
+                                            <div>
+                                                <ngx-intl-tel-input [cssClass]="'custom'" [attr.autocomplete]="false" 
+                                                    [resetSearchContainer]="true"
+                                                    [preferredCountries]="preferredCountries"
+                                                    [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
+                                                    [searchCountryFlag]="true"
+                                                    [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                                    [selectFirstCountry]="false"
+                                                    [selectedCountryISO]="CountryISO.UnitedStates" [maxLength]="10"
+                                                    [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
+                                                    [separateDialCode]="separateDialCode" name="phone"
+                                                    [inputId]="'mobile'" [formControl]="phoneNumber" [customPlaceholder]="'Enter Mobile Number'">
+                                                </ngx-intl-tel-input>
+                                            </div>
+                                            <label>Password <a id="forget" href="javascript:;"
+                                                    (click)="forgotStart()"><strong>Forgot it?</strong></a></label>
+                                            <div class="row-input">
+                                                <span class="icon_input position-absolute"><img
+                                                        src="assets/images/key.png"></span>
+                                                <input id="password" value="" [disabled]="isDisable"
+                                                    (enter)="loginDriverFn()" name="password"
+                                                    [(ngModel)]="loginDriver.password" class="password" name="password"
+                                                    type="password" placeholder="Enter Password" focus="true"
+                                                    autocomplete="new-password" minlength="6" [(ngModel)]="loginDriver.password"
+                                                    [ngModelOptions]="{standalone: true}" required >
+                                            </div>
+                                            <button class="submit userloginButton w-100" (click)="loginDriverFn()"
+                                                type="button" [disabled]="isDisable">Login</button>
+                                            <button class="signup_btn submit mb-2 w-100" [routerLink]="'/corporate_signup'"
+                                                type="button">Signup</button>
+                                        </form>
+                                        <div *ngIf="loadings" class="loaders"> <span><img
+                                                    src="assets/app-img/ring-alt.svg"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End inner Row-->
+
+                            <!--Start Inner Row1-->
+                            <div id="reset1" [hidden]="!(!loginMode&&forgotMode)" class="row ">
+                                <div class="col-md-6">
+                                    <h3>Reset Password</h3>
+                                    Enter your number and we will send you a OTP to reset your password.
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="login-form">
+                                        <form name="login">
+                                            <label>Mobile Number</label>
+                                            <div class="row-input" style="margin-bottom:15px !important;">
+                                                <div>
+                                                    <ngx-intl-tel-input [cssClass]="'custom'"
+                                                        [resetSearchContainer]="true"
+                                                        [preferredCountries]="preferredCountries"
+                                                        [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
+                                                        [searchCountryFlag]="true"
+                                                        [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                                        [selectFirstCountry]="false"
+                                                        [selectedCountryISO]="CountryISO.UnitedStates" [maxLength]="10"
+                                                        [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
+                                                        [separateDialCode]="separateDialCode" name="forgetMobile"
+                                                        [inputId]="'mobile1'" [formControl]="forgotMobileNumber">
+                                                    </ngx-intl-tel-input>
+                                                </div>
+                                            </div>
+                                            <button id="reset-2" class="submit" type="button" [disabled]="DisableOtp"
+                                                style="margin-bottom: 5px;" (click)="requestOTP()">Send OTP</button>
+                                            <!-- <button id="reset-2" class="submit" type="button"  ng-click="showVerify()">Verify</button> -->
+                                        </form>
+                                        <div *ngIf="loadings" class="loaders"> <span><img
+                                                    src="/assets/app-img/ring-alt.svg"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Start Inner Row1-->
+
+                            <!--Start Inner Row2-->
+                            <div id="reset2" [hidden]="!(!loginMode&&!forgotMode&&otpVerifyMode&&otpSent)" class="row ">
+                                <div id="main-hidden" class="col-md-5">
+                                    <h3>OTP Confirmation</h3>
+                                </div>
+                                <div id="main-hidden1" class="col-md-7">
+                                    Whether our users prefer a familiar face for the majority of their rides or want a
+                                    particular type of car for a particular situation, Qudos can deliver an experience
+                                    that is consistent with our rider's wants.
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="login-form"><br>
+                                        <p>Confirm your mobile number to reset your password</p>
+                                        <form name="login">
+                                            <label>Enter OTP sent to your Mobile number</label>
+                                            <div class="row-input">
+                                                <input id="otp" type="tel" [(ngModel)]="otp"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    (keypress)="isNumberKeys($event)" maxlength="4" inputmode="numeric"
+                                                    placeholder="0000" required>
+                                                <div class="row row-input a-color">
+                                                    <div class="col-xs-5"><button class="btn-links"
+                                                            [disabled]="DisableRegenrate" href="javascript:;"
+                                                            (click)="regenerateOTP()">Resend OTP</button></div>
+                                                    <div class="col-xs-7"><a href="javascript:;"
+                                                            (click)="changeNum()">Change Mobile number</a></div>
+                                                </div>
+                                            </div>
+                                            <button id="reset-3" class="submit top-margin" [disabled]="DisableVerifyOtp"
+                                                type="button" (click)="verifyOTP()">Submit</button>
+                                        </form>
+                                        <div *ngIf="loadings" class="loaders"> <span><img src="/assets/app-img/ring-alt.svg"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Start Inner Row2-->
+
+                            <!--Start Inner Row3-->
+                            <div id="reset3" [hidden]="!(!loginMode&&!forgotMode&&resetMode&&!otpVerifyMode)"
+                                class="row">
+                                <div class="col-md-6">
+                                    <h3>Reset Password</h3>
+                                    Qudos continues to act as the catalyst for lasting connections between drivers and
+                                    riders. Hang on there, you will get back in track in no time.
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="login-form">
+                                        <form name="login">
+                                            <label>Enter New Password</label>
+                                            <div class="row-input">
+                                                <span class="icon_input position-absolute"><img
+                                                        src="assets/images/key.png"></span>
+                                                <input id="passwordn" value="" name="passwordn"
+                                                    [(ngModel)]="resetPass.password" class="password" type="password"
+                                                    placeholder="Enter new password">
+                                            </div>
+                                            <label>Confirm New Password</label>
+                                            <div class="row-input">
+                                                <span class="icon_input position-absolute"><img
+                                                        src="assets/images/key.png"></span>
+                                                <input id="passwordnc" value="" name="passwordnc"
+                                                    [(ngModel)]="resetPass.confirmpassword" class="password"
+                                                    type="password" placeholder="Re-enter new password">
+
+                                            </div>
+                                            <button id="reset-4" class="submit" type="button" [disabled]="onloadDisble"
+                                                (click)="setPassword()">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--Start Inner Row3-->
+
+                            <!--Start Inner Row4-->
+
+                            <!--  [hidden]="(!loginMode&&!forgotMode&&!resetMode&&!otpVerifyMode&&resetSuccess)" -->
+
+                            <div id="reset4"
+                                [hidden]="!(!loginMode&&!forgotMode&&!resetMode&&!otpVerifyMode&&resetSuccess)"
+                                class="row row-input ">
+                                <div class="col-md-12">
+                                    <p class="small-show"><img src="assets/img/tick.png" alt="sucess">
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3>Reset Successfully</h3>
+                                    <p class="top-margin">Your Password has been successfuly changed, you can now
+                                        continue to login. </p>
+                                    <div class="row clear">
+                                        <div class="col-md-12">
+                                            <a id="login-main" (click)="switchToLogin()" class="submit-login submit">Go
+                                                to Login</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 small-hide">
+                                    <p align="center"><img src="assets/img/tick.png" width="180" height="180"
+                                            alt="sucess">
+                                    </p>
+                                </div>
+                            </div>
+                            <!--End Inner Row4-->
+                        </div>
+                        <!--End Main Content Popup-->
+                    </div>
+                    <!--End Row-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

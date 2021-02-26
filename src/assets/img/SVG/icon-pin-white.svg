@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="17px" height="24px" viewBox="0 0 17 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: sketchtool 3.5.1 (25234) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_pin_white</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="educator" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="03_register_error_message" sketch:type="MSArtboardGroup" transform="translate(-395.000000, -735.000000)" fill="#FFFFFF">
+            <g id="icon_pin_white" sketch:type="MSLayerGroup" transform="translate(395.000000, 735.000000)">
+                <g id="Capa_1" sketch:type="MSShapeGroup">
+                    <g id="Group">
+                        <path d="M8.4908538,0 C3.81252339,0 0.0196842105,3.76804938 0.0196842105,8.41575309 C0.0196842105,8.77155556 0.0484152047,9.11832099 0.0922076023,9.46207407 C0.816049708,16.0359012 7.94078947,23.6124938 7.94078947,23.6124938 C8.06774269,23.7536296 8.19012281,23.8406914 8.30797953,23.9037037 L8.31404386,23.906716 L8.55129825,23.9817778 L8.78855263,23.906716 L8.79461696,23.9037037 C8.91247368,23.840642 9.03490351,23.7490864 9.16180702,23.6124938 C9.16180702,23.6124938 16.1838012,16.0223704 16.8909912,9.44711111 C16.9332924,9.10785185 16.9620234,8.76404938 16.9620234,8.4142716 C16.9604825,3.76804938 13.1691842,0 8.4908538,0 L8.4908538,0 Z M8.4908538,13.8291358 C5.48682456,13.8291358 3.04190643,11.4001975 3.04190643,8.41580247 C3.04190643,5.43140741 5.48682456,3.00246914 8.4908538,3.00246914 C11.494883,3.00246914 13.9383099,5.43140741 13.9383099,8.41580247 C13.9383099,11.4001975 11.494883,13.8291358 8.4908538,13.8291358 L8.4908538,13.8291358 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

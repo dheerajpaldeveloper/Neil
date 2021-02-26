@@ -1,0 +1,197 @@
+<div class="container page" id="Trips">
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <a class="btn btn-outline-primary btn-md tripsbtn " style="float:left; margin-right:20px;"
+                            [routerLink]="['/', 'corporate', 'myUsers']" id="drivertripsbtnicon">My Users<img
+                                src="/assets/images/network.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+
+                        <a class="btn btn-outline-primary btn-md tripsbtn active-page"
+                            data-hover="/assets/images/network.png" data-unhover="/assets/images/network.png"
+                            [routerLink]="['/', 'corporate', 'allUsers']" id="drivertripsbtnicon">All
+                            Users<img src="/assets/images/network.png" style="padding-left:10px;"
+                                id="drivercariconbtn"></a>
+
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5 row pull-right  search-div">
+                        <div class="col-md-8">
+                            <span class="search-icon"><i class="fa fa-search"></i></span>
+                            <input type="text" placeholder="Search name, mobile no."
+                                class="input form-control field search-ng" [(ngModel)]="searchuser"
+                                [formControl]="searchForm" />
+                        </div>
+                        <div class="col-md-4 spacing">
+                            <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn"
+                                (click)="openAddUser()">New User</button>
+                        </div>
+
+                    </div>
+                    <div class="col-md-5 hidden">
+
+                        <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn" [hidden]="!(currentPage>1)"
+                            (click)="pageChanged(currentPage-1)">Prev</button>
+                        <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn" [disabled]="hideNext"
+                            (click)="pageChanged(currentPage+1)">Next</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tables
+         ================================================== -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+            </div>
+            <table class="table table-responsive trips dtrips">
+                <thead>
+                    <tr class="frow">
+                        <th class="desktop text-center" scope="col">ID</th>
+                        <th scope="col">User Details</th>
+                        <th class="text-center" scope="col">Name</th>
+                        <th class="text-center" scope="col">Email</th>
+                        <th class="text-center" scope="col">Mobile</th>
+                        <th class="text-center" scope="col">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody *ngIf="Users == null || Users == undefined">
+                    <tr>
+                        <td colspan="6" class="text-center">
+                            <i class="fa fa-spinner fa-spin" style="font-size:130%"></i>
+                        </td>
+                    </tr>
+                </tbody>
+                
+                <tbody *ngIf="Users.length > 0">
+                    <!-- ng-repeat="doc in Users | filter:searchuser track by $index" -->
+                    <tr *ngFor="let doc of Users;let i=index;">
+                        <td class="desktop text-center">{{doc.user_id}}</td>
+                        <td class="desktop text-center">{{doc.user_name}}</td>
+                        <td class="text-center">{{doc.user_name}}</td>
+                        <td class="text-center">{{doc.user_email}}</td>
+                        <td class="text-center">{{doc.user_mobile}}</td>
+                        <td class="text-center"> <button class="btn btn-outline-primary btn-md adddocbtn btn-padding"
+                                [disabled]="doc.disableATA" (click)="addtoAccount(doc)">Add to my account</button></td>
+                    </tr>
+
+                </tbody>
+                <tbody *ngIf="!hideLoadMore && Users.length >= 10">
+                    <tr>
+
+                        <td colspan="6" class="text-center"><button class="load-more-btn" [disabled]="DisableLoadMore"
+                                (click)="loadMore()">Load More</button></td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="Users.length == 0">
+                    <tr>
+                        <td colspan="6" class="text-center">No User Found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="add_to_account" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="row modaltitle">
+                <div class="col-sm-12">
+                    <button type="button" class="close" data-dismiss="modal"
+                        style="font-size:32px;float:right;padding:5px;">&times;</button>
+                    <h5 id="mtitle" style="text-align: center;font-size: 19px;">Add User to Account</h5>
+                </div>
+
+            </div>
+            <div class="modal-body">
+
+                <!-- <div [hidden]="!doc.successMsg" class="alert alert-success text-center">{{doc.successMsg}}</div>
+                <div [hidden]="!doc.errorMsg" class="alert alert-danger text-center">{{doc.errorMsg}}</div> -->
+                <div class="row modalrow">
+
+                    <div class="col-sm-6 text-center col-sm-offset-3">
+                        <label>Enter OTP</label>
+                        <div class="input-container text-center">
+                            <input type="text" maxlength="4" onkeypress="return isNumberKey(event)" placeholder="0000"
+                                [(ngModel)]="otpToAdd" class="form-control  text-center">
+                            <input type="hidden" [(ngModel)]="userToAdd" class="form-control  ">
+                            <input type="hidden" [(ngModel)]="userMobileToAdd" class="form-control  ">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 text-center col-sm-offset-3">
+                        <div class="text-center">
+                            <button href="javascript:;" class="callToAction" [disabled]="DisableResnd"
+                                (click)="reAddUser(userInProcess);">Resend OTP</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 addbtn">
+                        <div class="btn-align">
+                            <button type="submit" (click)="completeUserAdd()"
+                                class="btn btn-primary btn-md settingsbtn button-spacing" [disabled]="DisonloadCUA"
+                                style="border:1px solid #999;">Add User</button>
+
+                            <button type="button" data-toggle="modal" data-target="#show_confirmation"
+                                class="btn btn-primary btn-md button-black button-spacing"
+                                [disabled]="otpToAdd"  style="border:1px solid #999;">View OTP</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="show_confirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="">
+                <div class="col-sm-12">
+                    <button type="button" class="close" data-dismiss="modal" (click)="closePayment()"
+                        style="font-size:32px;float:right;padding:5px;">&times;</button>
+                </div>
+            </div>
+
+            <div class="modal-body ">
+                <div class="panel-body conody">
+                    <div class="col-sm-12  text-center">
+                        <h2 class="cconfirmation">Corporate Confirmation</h2>
+                        <p>By clicking ”Yes, Please Proceed”, it is confirmed that the Corporate holder have sufficient
+                            knowledge of the identity of the User and will be given access for the OTP that will be
+                            needed to add the User to this corporate account. </p>
+                        <hr class="confirm">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3 text-center">
+                                <button data-dismiss="modal"
+                                    class="btn btn-primary ride-confirm-btn button-black ">Cancel</button>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <button (click)="autoFillOTP();" data-dismiss="modal"
+                                    class="btn btn-primary ride-confirm-btn ">Yes, Please Proceed</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

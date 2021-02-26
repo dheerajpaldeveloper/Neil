@@ -1,0 +1,245 @@
+<section class="sign" style="padding-bottom: 20px;padding: 20px 0;margin-top: 0;padding: 0;padding-bottom: 70px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-xl-10 offset-xl-1">
+                <div class="sign__content page">
+                    <!--Start Row Sign Up-->
+                    <div class="row">
+                        <div class="popup-main-content">
+                            <!--Start Sign up Step 1-->
+                            <div class="row row-input">
+                                <div class="col-md-12 pull-right text-right mb-4"><button
+                                        class="bak-buton pull-right text-right"
+                                        [routerLink]="['/', 'corporate', 'myUsers']">Back</button></div>
+                                <!-- ui-sref="corporate.myUsers" -->
+                                <div id="main-hidden" class="col-md-5">
+                                    <h3>Rider Sign Up</h3>
+                                    <ul id="ny" class="signup-step">
+                                        <li id="li-step1" class="active"><a id="1-step"></a></li>
+                                        <li id="li-step2"><a id="2-step"></a></li>
+                                    </ul>
+                                    <ul id="no-ny" class="signup-step hidden">
+                                        <li id="li-step4"><a id="4-step"></a></li>
+                                        <li id="li-step5" class="active"><a id="5-step"></a></li>
+                                        <li id="li-step6"><a id="6-step"></a></li>
+                                    </ul>
+                                </div>
+                                <div id="main-hidden1" class="col-md-7">
+                                    Qudos platform creates an opportunity to build long-standing relationships only
+                                    trusted service providers can offer.
+                                </div>
+                            </div>
+                            <!--End Sign up Step 1-->
+
+                            <!--Start Sign up Step 6-->
+                            <div id="signup-6" [hidden]="!step1" class="row row-input">
+                                <div class="row row-input">
+                                    <div class="col-md-6">
+                                        <label>First Name<span class="mandatory">*</span></label>
+                                        <span class="icon_input_signup position-absolute"><img
+                                                src="/assets/img/user.png" alt="user-icon"></span>
+
+                                        <input id="fname1" class="user-input" name="fname" [(ngModel)]="riderUser.fname"
+                                            type="text" placeholder="Enter First Name"
+                                            onkeypress="return /[a-z ]/i.test(event.key)">
+                                    </div>
+                                    <!-- onkeypress="return /[a-z ]/i.test(event.key)" -->
+                                    <div class="col-md-6">
+                                        <label>Last Name<span class="mandatory">*</span></label>
+                                        <span class="icon_input_signup position-absolute"><img
+                                                src="/assets/img/user.png" alt="user-icon"></span>
+
+                                        <input id="lname1" class="user-input" name="lname" [(ngModel)]="riderUser.lname"
+                                            type="text" placeholder="Enter Last Name"
+                                            onkeypress="return /[a-z ]/i.test(event.key)">
+                                    </div>
+
+                                </div>
+
+                                <div class="row row-input">
+                                    <div class="col-md-6">
+                                        <label>Mobile Number<span class="mandatory">*</span></label>
+                                        <div class="row-input">
+                                            <ngx-intl-tel-input [cssClass]="'custom'"
+                                                [resetSearchContainer]="true"
+                                                [preferredCountries]="preferredCountries"
+                                                [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
+                                                [searchCountryFlag]="true"
+                                                [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                                [selectFirstCountry]="false" [selectedCountryISO]="countryToSet"
+                                                [maxLength]="15" [tooltipField]="TooltipLabel.Name"
+                                                [phoneValidation]="true" [separateDialCode]="separateDialCode"
+                                                name="phone" [inputId]="'phone'" [formControl]="mobileNumber"
+                                                id="phonenumber">
+                                            </ngx-intl-tel-input>
+                                            <!-- onpaste="return false;" -->
+
+                                        </div>
+                                        <input type="hidden" name="extTwo" id="extPopTwo">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>Email Address<span class="mandatory">*</span></label>
+                                        <span class="icon_input_signup position-absolute"><img
+                                                src="/assets/img/mail.png" alt="mail-icon"></span>
+                                        <input id="email1" class="email-add" name="lname" [(ngModel)]="riderUser.email"
+                                            type="text" placeholder="Enter your email">
+                                    </div>
+                                </div>
+
+                                <div class="row row-input">
+                                    <div class="col-md-6">
+                                        <label>City<span class="mandatory">*</span></label>
+                                        <span class="icon_input_signup position-absolute"><img
+                                                src="/assets/img/location.png" width='15px' alt="location-icon"></span>
+
+                                        <input name="city" type="text" class="location-add" [(ngModel)]="riderUser.city"
+                                            id="city" placeholder="Enter City"
+                                            onkeypress="return /[a-z ]/i.test(event.key)">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>Zip Code<span class="mandatory">*</span></label>
+                                        <span class="icon_input_signup position-absolute"><img
+                                                src="/assets/img/location.png" width='15px' alt="location-icon"></span>
+
+                                        <input name="zipcode" type="text" id="zipcode"
+                                            (onkeypress)="isNumberKeys($event)" [maxLength]="6" class="location-add"
+                                            [(ngModel)]="riderUser.zipcode" (onkeyup)="trimZip()" type="text"   
+                                            placeholder="Enter Zip Code">
+
+                                    </div>
+                                    <div class="row row-input">
+                                        <div class="col-md-6">
+                                            <label>Referring code</label>
+                                            <input id="referral" class="user-input" name="referral" type="text"
+                                                (onkeyup)="cleanCity()" placeholder="Optional">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 but-next">
+                                    <button id="fifth-step" href="javascript:;" [disabled]="disableMobileHit"
+                                        (click)="hitCheckMobile()" class="submit">Next</button>&nbsp;
+                                </div>
+                                <div *ngIf="loading" class="loaders"> <span><img
+                                            src="/assets/app-img/ring-alt.svg"></span>
+                                </div>
+                            </div>
+                            <!--End Sign up Step 6-->
+
+                            <!--Start Sign up Step 7-->
+
+                            <div id="signup-7" [hidden]="!step2" class="row row-input ">
+
+                                <div class="col-md-6 top-margin">
+                                    <p><strong>Confirm your Mobile Number</strong></p>
+                                    <label>Enter OTP sent to the mobile number</label>
+                                    <input id="otpToAdd" onkeypress="isNumberKeys(event)" maxlength="4" type="text"
+                                        [(ngModel)]="otpToAdd" name="verify-phone" class="phone-verify"
+                                        placeholder="0000" maxlength="4" inputmode="numeric">
+                                    <div class="row row-input a-color">
+                                        <div class="col-xs-5">Know the Rider?</div>
+                                    </div>
+
+                                    <div class="row row-input "
+                                        style="margin-top:10px!important; margin-bottom:15px!important">
+                                        <a id="getOtpCode" href="javascript:;" class="submit button-black"
+                                            style="background-color:#000!important;color:#fff!important">Get OTP
+                                            Code</a>
+                                    </div>
+
+                                    <div class="row row-input a-color">
+                                        <div class="col-xs-5"><button class="btn-links" [disabled]="DisableResnd"
+                                                id="resendOtp" (click)="reAddUser()" href="javascript:void(0)">Resend
+                                                OTP</button></div>
+                                        <div class="col-xs-7 hidden"><a id="changeMobile" (click)="showSignup1()"
+                                                href="javascript:void(0)">Change Mobile number</a></div>
+                                    </div>
+
+                                    <div class="row row-input top-margin">
+                                        <button id="six-step" (click)="riderSignUp()" [disabled]="onriderSignUp"
+                                            href="javascript:;" class="submit">Create the Rider Account</button>
+                                    </div>
+
+                                    <div *ngIf="loading" class="loaders"> <span><img
+                                                src="/assets/app-img/ring-alt.svg"></span>
+                                    </div>
+
+                                    <div class="row row-input top-margin a-color"></div>
+                                </div>
+                            </div>
+                            <!-- Start Sign Up Step 8-->
+                            <div id="signup-8" [hidden]="!step3" class="row row-input  ">
+                                <div class="col-md-12">
+                                    <p class="small-show"><img src="/assets/img/mail-sucess.png" alt="sucess">
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3>Welcome to Qudos</h3>
+                                    <p class="top-margin">We are excited to welcome you to a truly curated service that
+                                        only Qudos can offer.</p>
+                                    <div class="row clear">
+                                        <div class="col-md-6">
+                                            <a href="riderlogin.html" class="submit-veri">Ok, Thanks!</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 small-hide">
+                                    <p align="center"><img src="/assets/img/mail-sucess.png" width="200" height="200"
+                                            alt="sucess">
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- End Sign Up Step 8-->
+                            <!-- </form> -->
+                        </div>
+                    </div>
+                    <!--End Row Sign Up-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="modal fade" id="corporate_getCode" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+
+            <div>
+                <div class="col-sm-12">
+                    <button type="button" class="close" data-dismiss="modal"
+                        style="font-size:32px;float:right;padding:5px;">&times;</button>
+                </div>
+            </div>
+
+            <div class="modal-body ">
+                <div class="panel-body ">
+                    <div class="col-sm-9 text-center" style="margin:0 auto">
+                        <h2 class="mb-4 fontStyle">Corporate Confirmation</h2>
+                        <p class="cconfirmation">By Clicking "Yes, Please Proceed", it is confirmed that the corporate
+                            holder have sufficient knowledge of the identity of the User and will be given access for
+                            the OTP that will be needed to add the User to this corporate account.</p>
+                        <hr class="confirm">
+                        <div class="row">
+
+                            <div class="col-md-1"></div>
+
+                            <div class="col-md-5 text-center">
+                                <button style="color:#fff!important;background-color:#000!important;"
+                                    data-dismiss="modal"
+                                    class="btn btn-primary ride-confirm-btn button-black">Cancel</button>
+                            </div>
+
+                            <div class="col-md-5 text-center">
+                                <button type="button" id="getCodeProceed" (click)="autofillotp()"
+                                    class="btn btn-primary ride-confirm-btn  ">Yes, Please Proceed</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

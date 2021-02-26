@@ -1,0 +1,408 @@
+@media (min-width: 992px) {
+    .modal-lg {
+        max-width: 800px !important;
+        max-height: 423px !important;
+    }
+}
+@media (min-width: 576px) {
+    .modal-dialog-centered {
+        min-height: calc(100% - (1.75rem * 2)) !important;
+    }
+}
+@media (max-width: 578px) {
+    .col-sm-offset-3 {
+        margin-left: 0% !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-xl-7 {
+        flex: 0 0 58.333333%;
+        max-width: 57.333333%;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .md-sidenav-right {
+        left: 75% !important;
+    }
+
+    .button-wrapper button{
+        font-size: 80%!important;
+        padding: 0px 3px;
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .md-sidenav-right {
+        left: 81% !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .modal-xl {
+        max-width: 1024px;
+    }
+
+    .button-wrapper button{
+        font-size: 77%!important;
+        padding: 0px 3px;
+        width: 80%;
+    }
+}
+
+@media (min-width: 992px) {
+    div#leftSidebar.col-lg-4 {
+        -ms-flex: 0 0 26%;
+        flex: 0 0 26%;
+        max-width: 26%;
+    }
+
+    div#expandedDiv.col-lg-3 {
+        -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+}
+
+@media (min-width: 1200px) {
+    div#leftSidebar.col-xl-3 {
+        flex: 0 0 22.83%;
+        max-width: 22.83%;
+    }
+
+    div#expandedDiv.col-xl-2 {
+        -ms-flex: 0 0 19.6%;
+        flex: 0 0 19.6%;
+        max-width: 19.6%;
+    }
+
+    div#mapCustom.col-xl-7 {
+        -ms-flex: 0 0 57.53%;
+        flex: 0 0 57.53%;
+        max-width: 57.53%;
+    }
+}
+
+
+@media screen and (min-width: 1365px) and (max-width: 1600px) {
+    .carshow a {
+        font-size: 81%;
+    }
+
+    .paging-area button,
+    .paging-area span {
+        font-size: 100%;
+        padding: 8px 12px;
+    }
+}
+
+@media (min-width: 1366px) {
+    img.img.img-responsive {
+        border-radius: 50%;
+        border: 5px solid white;
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        min-height: 94px;
+        max-height: 94px;
+    }
+
+    .main-data-in {
+        overflow: hidden;
+    }
+
+    .col-md-5.d-image {
+        height: auto;
+        width: 100%;
+        min-height: 78px;
+        max-height: 78px;
+        max-width: 78px;
+        border: 5px solid white;
+        margin-left: 8px;
+    }
+}
+
+@media screen and (max-width: 1700px) {
+    .driver-car.select-car-option {
+        font-size: 10px;
+    }
+
+    img.img.img-responsive {
+        min-height: 78px;
+        min-width: 78px;
+        max-height: 78px;
+    }
+
+    button.car-select-btn {
+        font-size: 14px;
+    }
+
+    .row.user-card {
+        min-height: 160px;
+    }
+}
+.highlight:hover{
+    color:#1f8dc6 !important;
+}
+
+.serchfield{
+    font-size:14px;
+    width:240px !important;
+}
+ .ipad-btn{
+       margin-bottom:6px;
+   }
+@media screen and (min-width: 1025px) and (max-width: 1400px) {
+    .paging-area button,
+    .paging-area span {
+        font-size: 95%;
+        padding: 7px 9px;
+    }
+
+    input#search {
+        background-position: 6px 9px;
+        background-size: 13px 13px;
+        font-size: 90%;
+        width: 76%;
+    }
+
+    .newRide-button {
+        font-size: 75%;
+        padding: 5px 10px !important;
+    }
+
+    input.search-input {
+        padding-left: 24px;
+        background-size: 11%;
+        background-position: 6px 10px;
+        font-size: 85%;
+    }
+
+    .same-height {
+        font-size: 90%;
+        padding: 10px 8px;
+    }
+    .details-height {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        // font-size: 12px;
+        font-size: 90%;
+    }
+
+    .nr-section label.nr-label {
+        font-size: 9px;
+    }
+
+    .nr-section,
+    .nr-section input {
+        font-size: 86%;
+    }
+
+    .rr-section,
+    .rr-section input {
+        font-size: 86%;
+    }
+
+    .carshow a {
+        font-size: 81%;
+    }
+  
+    .carshow a.tripsbtn.ipad-btn {
+        padding: 10px 15px;
+        border-color: 1px solid #ccc !important;
+        
+    }
+
+    .heading {
+        font-size: 1.640625rem !important;
+    }
+
+    .typography h3 {
+        font-size: 1.640625rem !important;
+    }
+    .col-md-5.d-image {
+        height: auto;
+        width: 100%;
+        min-height: 78px;
+        max-height: 78px;
+        max-width: 78px;
+        border: 5px solid white;
+        margin-left: 8px;
+    }
+
+    img.img.img-responsive {
+        min-height: 67px;
+        max-height: 67px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .page-nopad button.paging-link {
+        padding: 4px;
+    }
+
+    input.user-input {
+        padding-left: 29px;
+        padding-right: 6px;
+    }
+
+    body {
+        font-size: 90% !important;
+    }
+
+    .nr-section h3,
+    .rr-section h3 {
+        font-size: 16px;
+    }
+
+    .search-box {
+        padding-left: 15px;
+    }
+
+    md-tab-item span {
+        font-size: 13px;
+    }
+
+    // #NAR0012, mat-tab for ipad screen size.----
+
+    ::ng-deep.mat-ink-bar {
+        width: 100px !important;
+    }
+    
+    ::ng-deep.mat-tab-label-container {
+        padding: 0px 2px !important;
+    }
+
+    ::ng-deep .mat-tab-label {
+        // font-size: 15px;
+        // font-size: 1vw !important;
+        // min-width: 60px !important;
+        padding:0px 8px !important;
+    }
+    // -------------------------------------------
+    
+    .col-md-6,
+    .col-md-12 {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+
+    .newRide-button {
+        padding: 7px 15px;
+        min-height: 28px !important;
+        min-width: 100%;
+    }
+
+    div#expandedDiv {
+        max-height: 90vh;
+        min-height: 90vh;
+    }
+
+    .row.nr-section {
+        min-height: 84vh;
+    }
+
+    .paging-area button,
+    .paging-area span {
+        font-size: 95%;
+        padding: 7px 9px;
+    }
+
+    input#search {
+        background-position: 6px 9px;
+        background-size: 13px 13px;
+        font-size: 90%;
+        width: 76%;
+    }
+
+    input.search-input {
+        padding-left: 24px;
+        background-size: 11%;
+        background-position: 6px 10px;
+        font-size: 85%;
+    }
+
+    .same-height {
+        font-size: 95%;
+        padding: 10px 8px;
+    }
+
+    .nr-section label.nr-label {
+        font-size: 9px;
+    }
+
+    .nr-section,
+    .nr-section input {
+        font-size: 86%;
+    }
+
+    .rr-section,
+    .rr-section input {
+        font-size: 86%;
+    }
+
+    .rr-section {
+        width: 274px;
+        left: 104%;
+        z-index: 999999;
+    }
+
+    div#leftSidebar.col-lg-4 {
+        -ms-flex: 0 0 29%;
+        flex: 0 0 29%;
+        max-width: 29%;
+    }
+
+    div#mapCustom.col-lg-8 {
+        -ms-flex: 0 0 71%;
+        flex: 0 0 71%;
+        max-width: 71%;
+    }
+
+    div#expandedDiv {
+        position: absolute;
+    }
+
+    div#expandedDiv.expandedView {
+        transform: translate(112%);
+        transition: all 1s ease 0s;
+        left: 0;
+    }
+
+    .newride-box {
+        display: none;
+    }
+
+    .table-full {
+        max-height: 61.6vh;
+        overflow-y: auto;
+    }
+
+    img.img.img-responsive {
+        min-height: 62px;
+        max-height: 61px;
+    }
+
+    .myautocomplete {
+        top: 19.3%;
+        left: 30%;
+        min-width: 261px;
+        height: 293px;
+    }
+}
+
+@media (min-width: 992px) {
+    div#leftSidebar.col-lg-3 {
+        -ms-flex: 0 0 22%;
+        flex: 0 0 22%;
+        max-width: 22%;
+    }
+
+    div#expandedDiv.col-lg-2 {
+        -ms-flex: 0 0 19.6%;
+        flex: 0 0 19.6%;
+        max-width: 19.6%;
+    }
+}

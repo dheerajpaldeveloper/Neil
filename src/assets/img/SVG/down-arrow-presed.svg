@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="39px" height="35px" viewBox="0 0 39 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: sketchtool 3.4.4 (395) - http://www.bohemiancoding.com/sketch -->
+    <title>down_arrow_presed</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="39" height="35" rx="3"></rect>
+    </defs>
+    <g id="provider" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="01_landing_page" sketch:type="MSArtboardGroup" transform="translate(-1102.000000, -913.000000)">
+            <g id="Craft-your-journey,--+-Is-It-a-Time-for-a-C" sketch:type="MSLayerGroup" transform="translate(0.000000, 262.000000)">
+                <g id="down_arrow_presed" transform="translate(1102.000000, 651.000000)">
+                    <mask id="mask-2" sketch:name="Mask" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#00395E" sketch:type="MSShapeGroup" xlink:href="#path-1"></use>
+                    <rect id="Rectangle-268" fill="#00395E" sketch:type="MSShapeGroup" mask="url(#mask-2)" x="0" y="33" width="39" height="2" rx="3"></rect>
+                    <text id="&gt;" sketch:type="MSTextLayer" mask="url(#mask-2)" transform="translate(20.000000, 18.000000) rotate(-270.000000) translate(-20.000000, -18.000000) " font-family="Bariol" font-size="22" font-weight="normal" fill="#FFFFFF">
+                        <tspan x="16" y="23">&gt;</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

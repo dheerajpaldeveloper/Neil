@@ -1,0 +1,267 @@
+td.cust {
+    word-break: break-word;
+    max-width: 216px;
+}
+
+select.form-control.width-sm {
+    display: inline-block;
+    width: 12%;
+    -webkit-appearance: menulist;
+    margin-left: 2%;
+}
+
+button.btn.transparent {
+    display: inline;
+    border: none;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+button.btn.transparent:hover,
+button.btn.transparent:active,
+button.btn.transparent:focus {
+    background: #fff !important;
+    border: none !important;
+}
+
+.btn-outline-primary.transparent:not(:disabled):not(.disabled).active,
+.btn-outline-primary.transparent:not(:disabled):not(.disabled):active,
+.show > .btn-outline-primary.transparent.dropdown-toggle {
+    background: #fff !important;
+    border: none !important;
+    color: transparent;
+}
+
+.btn.transparent.disabled,
+.btn.transparent:disabled {
+    opacity: 0.4;
+}
+
+.btn-outline-primary.active-page:not(:disabled):not(.disabled):active,
+.btn-outline-primary.active-page {
+    color: #fff !important;
+}
+
+a.tripsbtn,
+a.tripsbtn:focus,
+a.tripsbtn:hover,
+a.tripsbtn:active {
+    color: #565353 !important;
+}
+
+a.tripsbtn.exportBtn,
+a.tripsbtn.exportBtn:focus,
+a.tripsbtn.exportBtn:hover,
+a.tripsbtn.exportBtn:active {
+    color: #fff !important;
+}
+
+a.tripsbtn.active-page {
+    color: #fff !important;
+}
+
+#Trips a.tripsbtn:not(.active-page):hover {
+    color: #fff !important;
+    background: #222e46 !important;
+}
+.form-control {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.tripsbtn {
+    font-weight: 600;
+}
+.selectContainer {
+    height: 46px;
+}
+.table thead th {
+    cursor: default !important;
+}
+::ng-deep .p-dropdown{
+     margin-left: 20px;
+}
+::ng-deep .p-dropdown .p-dropdown-label{
+    height:45px;
+    padding-top: 11px;
+    padding-left: 15px;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+// ==================================================
+// Importing Google Fonts - Poppins
+// ==================================================
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+// ==================================================
+// Global Variables
+// ==================================================
+
+
+$primary-color:      #0A0C15;
+$secondary-color:    #F2F2F2;
+$btn-blue:           #1F8DC6;
+$text-color:         #828282;
+$dark-blue:          #334D6E;
+
+$border-color:       #EBEFF2;
+
+$global-font: 'Poppins', sans-serif;
+
+
+// ==================================================
+// Global Classes
+// ==================================================
+
+
+.tab-btn {
+    font-family: $global-font;
+    font-size: 12px;
+    font-weight: 400;
+    color: #707683;
+    background-color: transparent;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    min-width: 145px;
+    height: 30px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    transition: all .2s ease-in;
+        -webkit-transition: all .2s ease-in;
+        -moz-transition: all .2s ease-in;
+    
+    &:hover, &:focus, &:active {
+        background-color: $btn-blue;
+        border-color: $btn-blue;
+        color: #ffffff;
+    }
+}
+.mr-10 {
+    margin-right: 10px;
+}
+
+
+// ==================================================
+// Page UI Design
+// ==================================================
+
+.page-header {
+    .page-main-title {
+        .title {
+            color: $dark-blue;
+            font-family: $global-font;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+    }
+}
+.tab-btn, .table-search-form {
+    display: inline-block;
+}
+.table-search-form {
+    .form-control-theme {
+        min-width: 175px;
+        height: 30px;
+        background: #ffffff;
+        border: 1px solid $border-color;
+        box-sizing: border-box;
+        border-radius: 4px;
+    }   
+}
+.search-form-group {
+    position: relative;
+    .form-control-theme {
+        padding-left: 35px;
+        font-size: 12px;
+        &::placeholder {
+            color: #90A0B7;
+            font-family: $global-font;
+            letter-spacing: 0.01em;
+        }
+    }
+    .search-icon {
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+        font-size: 15px;
+        color: #C2CFE0;
+    }
+}
+
+.page-main-tabs {
+    .nav-tabs {
+        border-bottom: 1px solid #EBEFF2;
+        margin-top: 25px;
+    }
+    .nav-item:not(.active) a.nav-link {
+        margin: 0;
+        background: transparent;
+        border: unset;
+        margin: 0 25px 0 0;
+        border-radius: 0;
+        padding: 0 0 12px 0;
+    }
+    .nav-tabs .nav-link {
+        font-size: 17px;
+        font-weight: 500;
+        color: $text-color;
+        &.active {
+            color: #2C71C3;
+            border-bottom: 2px solid #2C71C3 !important;
+        }
+    }
+}
+.tab-content .tab-pane.active {
+    background-color: transparent;
+}
+.table-layout-theme {
+    margin-top:  22px;
+    .table thead th {
+        padding: 0 0 20px 0;
+        color: #334D6E;
+        font-weight: 500;
+        opacity: .75;
+        font-size: 15px;
+       &:first-child {
+            width: 8%;
+        }
+    }
+    .table tr td {
+        padding: 10px 0;
+        font-size: 15px;
+        color: #828282;
+        font-weight: 400;
+    }
+    .table td, .table th {
+        vertical-align: middle;
+    }
+    .table td, .table tbody th  {
+        border-top: 1px solid #EBEFF2;
+        font-weight: 400;
+        color: #828282;
+        font-size: 15px;
+    }
+    .table thead .th-sm {
+        width: 8%;
+    }
+    .table tbody tr:last-child td,
+    .table tbody tr:last-child th {
+        border-bottom: 1px solid #EBEFF2;
+    }
+}
+
+@media screen and ( min-width: 1650px ){
+    
+    .page-container-xl {
+        max-width: 1440px;
+    }
+    
+}
+

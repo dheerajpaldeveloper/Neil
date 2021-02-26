@@ -1,0 +1,266 @@
+<div class="container page" id="Trips">
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <a class="btn btn-outline-primary btn-md tripsbtn" data-hover="assets/images/caricongrey.png"
+                    data-unhover="images/caricon.png" style="float:left; margin-right:20px;" id="drivertripsbtnicon"
+                    [routerLink]="['/', 'corporate', 'notification-settings']">Notification Settings</a>
+                <!-- [href]="corporate.notificationSettings" -->
+                <a class="btn btn-outline-primary btn-md tripsbtn settingsbtn active-page" id="mydocbtnicon"
+                    [routerLink]="['/', 'corporate', 'notifications']">My
+                    Notifications
+                    <img src="/assets/images/document1.png" style="padding-left:10px;"></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tables
+      ================================================== -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+            </div>
+            <table class="table table-responsive trips desktop">
+                <thead>
+                    <tr class="frow">
+                        <th scope="col">ID</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Status</th>
+                        <th style="max-width:15%!important" scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="Notifications.length > 0 || UnReadNotifications.length > 0">
+                    <!-- ng-repeat="doc in UnReadNotifications  track by $index" -->
+                    <tr *ngFor="let doc of UnReadNotifications;let i=index;" class="unRead-notif">
+                        <td>{{doc.session_id}}</td>
+                        <td>{{doc.created_at |date:'MMM dd yyyy,'}} <br>{{doc.created_at |date:'hh:mm a EEEE'}}</td>
+                        <td>{{doc.subject}} </td>
+                        <td class="notification-message" style="max-width:15%!important">
+                            <p>{{doc.message}}</p>
+                        </td>
+                    </tr>
+                    <!-- ng-repeat="doc in Notifications  track by $index" -->
+                    <tr *ngFor="let doc of Notifications;let i=index;">
+                        <td>{{doc.session_id}}</td>
+                        <td>{{doc.created_at |date:'MMM dd yyyy,'}} <br>{{doc.created_at |date:'hh:mm a EEEE'}}</td>
+                        <td>{{doc.subject}} </td>
+                        <td class="notification-message" style="max-width:15%!important">
+                            <p>{{doc.message}}</p>
+                        </td>
+
+                    </tr>
+                    <tr [hidden]="hideLoadMore">
+                        <td colspan="4" class="text-center"><button class="load-more-btn" [disabled]="DisableLoadMore"
+                                (click)="loadMore()">Load More</button></td>
+                    </tr>
+
+                    <tr [hidden]="!(Notifications.length == 0 && UnReadNotifications.length == 0)">
+                        <td colspan="4" class="text-center">No Notification Found</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="document_dialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <h4>{{verifymsg}}</h4>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="row modaltitle">
+                <div class="col-sm-11 col-12">
+                    <button type="button" class="close" data-dismiss="modal"
+                        style="font-size:32px;float:right;padding:5px;">&times;</button>
+                    <h5 id="mtitle" style="text-align: center;">Add Document</h5>
+                </div>
+
+            </div>
+            <div class="modal-body modal-lg">
+                <!-- <form enctype="multipart/form-data" name="myForm"
+                    (submit)="myForm.$submitted&&addEditDocType(doc,type)">
+                    <div [hidden]="!doc.successMsg" class="alert alert-success text-center">{{doc.successMsg}}</div>
+                    <div [hidden]="!doc.errorMsg" class="alert alert-danger text-center">{{doc.errorMsg}}</div>
+                    <div class="row modalrow">
+                        <div class="col-sm-6 modalrowleft">
+                            <div>
+                                <a class='btn btn-default border uploaddoc mb-1' href='javascript:;' id="afterborder"
+                                    style="cursor:pointer;">
+                                    <i class="fa fa-paperclip mr-2 paperlink" aria-hidden="true"></i>
+                                    <p style="cursor: pointer;">Upload new document <br> as an attachment</p>
+                                    <input type="file" accept="image/*"
+                                        class="form-control form-control-lg upload tlc_img"
+                                        style='filter: alpha(opacity=0);opacity:0;margin-top:-71px;margin-left:-35px;width: 100%; display: block;'
+                                        name="file_source" image="image" (change)="file_to_upload($event.target.files)"
+                                        data-button-text="Single" data-class-button="btn btn-default"
+                                        data-classinput="form-control inline" nv-file-select="" uploader="uploader"
+                                        id="mydocupload">
+                                    <p *ngIf="type==0" class="nowrap">{{doc.doc_file_name}}</p>
+                                </a>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 modalrowright">
+                            <label> Choose Document Type</label>
+                            <label *ngIf="type==1"> Document Type : {{docName}}</label>
+                            <div class="input-container">
+                                <i class="fa fa-pencil-square-o icon"></i>
+
+
+                                <select class="form-control" (change)="typeSelect($event.target.value)">
+                                    <option value="">Select Document Type*</option>
+                                    <option *ngFor="let documentType of docTypes"
+                                        value="{{documentType.document_type_id}}">
+                                        {{documentType.document_name}}
+                                    </option>
+                                </select>
+
+
+                            </div>
+                            <label> Enter Expiry Date* of the Documents</label>
+
+                            <div class="input-container">
+                                <i class="fa fa-calendar icon"></i>
+                                <input type="text" [(ngModel)]="doc.expiry_date" class="form-control input-field cal"
+                                    id="date" data-format="DD-MM-YYYY" data-template="DD MMM YYYY" name="date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 addbtn">
+                            <div class="btn-align">
+                                <button type="submit" (click)="addEditDocType(doc,0)" class="btn btn-primary btn-md"
+                                    [disabled]="submitText!='Submit'"
+                                    style="border:1px solid #999;">{{submitText}}</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="document_dialog_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <h4>{{verifymsg}}</h4>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="row modaltitle">
+                <div class="col-sm-11 col-12">
+                    <button type="button" class="close" data-dismiss="modal"
+                        style="font-size:32px;float:right;padding:5px;">&times;</button>
+                    <h5 id="mtitle" style="text-align: center;">Document Details</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-lg">
+                <!-- <form enctype="multipart/form-data" name="myForm" (submit)="myForm.$submitted&&addEditDocType(doc,1)">
+                    <div [hidden]="!doc.successMsg" class="alert alert-success text-center">{{doc.successMsg}}</div>
+                    <div [hidden]="!doc.errorMsg" class="alert alert-danger text-center">{{doc.errorMsg}}</div>
+                    <div class="row modalrow">
+                        <div class="col-sm-6 modalrowleft">
+                            <img src="{{doc.document_url}}" alt="{{doc.docType.document_name}}"
+                                style="width:50%;padding:10px 0;max-height: 100px">
+                            <p>{{doc.docType.document_name}}</p>
+                            <div>
+                                <a class='btn btn-default border uploaddoc' href='javascript:;' style="cursor: pointer;"
+                                    id="afterbordero">
+                                    <i class="fa fa-paperclip mr-2 paperlink" aria-hidden="true"></i>
+                                    <p style="cursor: pointer;text-align: center;">Upload new document <br> as an
+                                        attachment</p>
+                                    <input type="file" accept="image/*"
+                                        class="form-control form-control-lg upload tlc_img"
+                                        style='filter: alpha(opacity=0);opacity:0;margin-top:-71px;margin-left:-35px;'
+                                        name="file_source" image="image" (change)="file_to_upload($event.target.value)"
+                                        data-button-text="Single" data-class-button="btn btn-default"
+                                        data-classinput="form-control inline" nv-file-select="" uploader="uploader"
+                                        id="mydocuploado">
+                                    <p class="nowrap" style="margin-left:32px;">{{doc.doc_file_name}}</p>
+                                </a>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 modalrowright">
+                            <label> Choose Document Type</label>
+                            <label *ngIf="type==1"> Document Type : {{docName}}</label>
+                            <div class="input-container">
+                                <i class="fa fa-pencil-square-o icon"></i>
+                                <select class="form-control" (change)="typeSelect($event.target.value)">
+                                    <option value="">Select Document Type*</option>
+                                    <option *ngFor="let documentType of docTypes"
+                                        value="{{documentType.document_type_id}}">
+                                        {{documentType.document_name}}
+                                    </option>
+                                </select>
+                            </div>
+                            <label> Enter Expiry Date* of the Documents</label>
+
+                            <div class="input-container">
+                                <i class="fa fa-calendar icon"></i>
+                                <input type="text" [(ngModel)]="doc.expiry_date" class="form-control input-field cal"
+                                    id="edate" data-format="DD-MM-YYYY" data-template="DD MMM YYYY" name="edate">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 addbtn">
+                            <div class="btn-align">
+                                <button type="submit" (click)="editDocument(doc)" class="btn btn-primary btn-md"
+                                    style="border:1px solid #999;">{{'Update'}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <script>
+    $('#datepicker').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
+</script>
+<script>
+    $('.panel-faq').on('show.bs.collapse', function () {
+        $(this).addClass('active');
+    });
+
+    $('.panel-faq').on('hide.bs.collapse', function () {
+        $(this).removeClass('active');
+    });
+    App.controller('documentsController', function ($rootScope, $scope, $http, $cookies, $cookieStore, MY_CONSTANT, $state, ngDialog, $timeout) {
+        if (!$cookieStore.get('access_token')) {
+            $state.go("corporate_login");
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    $('#mydocuploado').click(function () {
+        $('#afterbordero').css("cssText", "border:1px solid #1f8dc6!important;");
+    });
+    $('#mydocupload').click(function () {
+        $('#afterborder').css("cssText", "border:1px solid #1f8dc6!important;");
+    });
+
+    $('#date').combodate({
+        firstItem: 'name',
+    });
+    $('#edate').combodate({
+        firstItem: 'name',
+    });
+
+</script> -->

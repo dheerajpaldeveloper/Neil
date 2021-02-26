@@ -1,0 +1,16 @@
+.button-spacing {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.tripsbtn {
+    font-weight: 600;
+}
+.centered-text {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+@media (max-width: 1200px) {
+.tripsbtn {
+        padding: 10px 12px 10px 12px !important;
+}
+}

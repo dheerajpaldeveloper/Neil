@@ -1,0 +1,461 @@
+<div class="container page" id="Trips">
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <a class="btn btn-outline-primary btn-md tripsbtn active-page" style="float:left; margin-right:20px;"
+                    [routerLink]="['/', 'corporate', 'scheduled-trips']" id="drivertripsbtnicon1">{{(ridesType=='1') ?
+                    'Scheduled' : 'Regular'}}
+                    trips<img src="/assets/images/caricongrey.png" style="padding-left:10px;"
+                        id="drivercariconbtn1"></a>
+
+                <a class="btn btn-outline-primary btn-md tripsbtn" data-hover="/assets/images/caricongrey.png"
+                    data-unhover="/assets/images/caricon.png" style="float:left;margin-right:20px;"
+                    [routerLink]="['/', 'corporate', 'completed-trips']" id="drivertripsbtnicon2">Completed trips<img
+                        src="/assets/images/caricon.png" style="padding-left:10px;" id="drivercariconbtn2"></a>
+
+                <a class="btn btn-outline-primary btn-md tripsbtn" style="float:left;"
+                    [routerLink]="['/', 'corporate', 'cancelled-trips']" data-hover="/assets/images/caricongrey.png"
+                    data-unhover="/assets/images/caricon.png" id="drivertripsbtnicon3">Cancelled trips<img
+                        src="/assets/images/caricon.png" style="padding-left:10px;" id="drivercariconbtn3"></a>
+
+                <a class="btn btn-outline-primary btn-md tripsbtn exportBtn" style="float:left;margin-left:20px;"
+                    (click)="getCSV('trips');" id="drivertripsbtnicon">Export CSV</a>
+
+                <!-- <select class="form-control width-sm selectContainer cursor-pointer" (change)="setRideType()"
+                    [(ngModel)]="ridesType" name="ridesType">
+                    <option value="1"><a style="cursor: pointer;">Scheduled</a></option>
+                    <option value="0"><a style="cursor: pointer;">Regular</a></option>
+                </select> -->
+
+
+                <p-dropdown [options]="data" [(ngModel)]="ridesType" (onChange)="setRideType()" ></p-dropdown>
+
+
+                <button class="btn btn-outline-primary btn-md dnextbtn transparent" [disabled]="hideNext"
+                    (click)="pageChanged(currentPage+1)" style="float:right;"><img src="/assets/images/next.png"
+                        alt="Next" /></button>
+                <button class="btn btn-outline-primary btn-md dnextbtn transparent" [hidden]="!(currentPage>1)"
+                    (click)="pageChanged(currentPage-1)" style="float:right;"><img src="/assets/images/prev.png"
+                        alt="Prev"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tables
+          ================================================== -->
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="page-header"></div>
+            <div class="table-responsive-md">
+                <table class="table trips_detail dtrips trips">
+                    <thead>
+                        <tr class="frow">
+                            <th scope="col" class="desktop not-that-first"><i class="fa fa-ellipsis-v"
+                                    aria-hidden="true"></i>Session</th>
+                            <th scope="col"><i class="fa fa-map-marker"></i>Pickup</th>
+                            <th scope="col" class="desktop"><i class="fa fa-user-circle"></i>User</th>
+                            <th scope="col" class="mobilecar"><img src="/assets/images/caricon.png"
+                                    style="padding-right:10px;">
+                                Car</th>
+                            <th scope="col" class="desktop"><i class="fa fa-ellipsis-h" aria-hidden="true"></i>Status
+                            </th>
+                            <th scope="col" class="desktop"><i class="fa fa-credit-card"></i>Payment Method</th>
+                            <th scope="col" class="lastth"></th>
+                        </tr>
+                    </thead>
+                    <!-- ng-repeat="trip in myTrips track by $index" -->
+                    <tbody ng-init="$last?loadData():null" *ngFor="let trip of myTrips;let index=index;"
+                        class="rideBody Disb" [hidden]="!(ridesType==trip.is_schedule)">
+                        <!-- on-finish-render="ngRepeatFinished" -->
+                        <!-- href="#collapse{{$index}}" -->
+                        <tr role="button" data-toggle="collapse">
+                            <td class="desktop not-that-first">{{trip.session_id}}</td>
+                            <td [hidden]="!(trip.is_schedule == '1')">{{trip.pickup_time|date:'MMM dd yyyy'}} <br>
+                                {{trip.pickup_time|date:'hh:mm a'}} </td>
+                            <td [hidden]="!(trip.is_schedule == '0')">{{trip.start_time|date:'MMM dd yyyy'}} <br>
+                                {{trip.start_time|date:'hh:mm a'}} </td>
+                            <td class="desktop cust">{{trip.user_name}}</td>
+                            <td class="mobilecar">{{trip.car_name}}</td>
+                            <td class="desktop">{{trip.ride_status}}</td>
+                            <td class="desktop">${{trip.total_with_tax}} paid via {{trip.payment_method}} </td>
+                            <td class="lasttd">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading active" role="tab" id="heading{{index}}">
+                                        <a role="button" style="color:#999;">
+                                            <span></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <br>
+                            </td>
+                        </tr>
+
+                        <tr id="collapse{{index}}" class="panel-collapse collapse in">
+                            <td colspan="12" style="border:none;padding:0px;">
+                                <div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-1"></div>
+                                            <div class="col-sm-5 smallfare">
+                                                <i class="fa fa-bookmark" style="color:#1f8dc6; font-size: 16px;"></i>
+                                                &nbsp;<span
+                                                    style="color:#1f8dc6; font-size: 15px;font-weight: 500;">Fare</span>
+                                                <h2 style="color:#555;text-shadow:none;font-weight:bold; ">
+                                                    ${{trip.total_with_tax}}</h2>
+                                                <p style="font-size: 14px;margin-bottom:6px"
+                                                    [hidden]="!(trip.is_schedule == '1')">
+                                                    {{trip.pickup_time|date: 'EEEE, MMMM d, y hh:mm a'}}</p>
+                                                <p style="font-size: 14px;margin-bottom:6px"
+                                                    [hidden]="!(trip.is_schedule == '0')">
+                                                    {{trip.start_time|date: 'EEEE, MMMM d, y hh:mm a'}}</p>
+                                                <p *ngIf="trip.ride_essential == 1"
+                                                    style="font-size: 14px;color: #008000">QudosEssentials</p>
+                                                <p style="display:none;" class="cardno"><i
+                                                        class="fa fa-credit-card"></i>&nbsp;&nbsp;Card Number : *****485
+                                                </p>
+                                                <hr>
+                                                <img src="images/cariconblue.png" class="smfcar"> &nbsp;<span
+                                                    style="color:#1f8dc6; font-size: 16px;font-weight: 600; float: left;">Trip
+                                                    details</span>
+                                                <ul class="triptime mytripspage">
+                                                    <li>
+                                                        <p>
+                                                            <b [hidden]="!(trip.is_schedule == '1')">{{trip.pickup_time|date:
+                                                                'hh:mm a'}}</b>
+                                                            <b [hidden]="!(trip.is_schedule == '0')">{{trip.start_time|date:
+                                                                'hh:mm a'}}</b>
+                                                            <br>
+                                                            {{trip.pickup_location_address}}
+                                                        </p>
+                                                        <div class="verticalLine"></div>
+                                                    </li>
+                                                    <li>
+                                                        <p>
+                                                            <b [hidden]="!(trip.is_schedule == '1')">{{trip.drop_time|date:
+                                                                'hh:mm a'}}</b>
+                                                            <b [hidden]="!(trip.is_schedule == '0')">{{trip.drop_time|date:
+                                                                'hh:mm a'}}</b>
+                                                            <br>
+                                                            {{trip.manual_destination_address}}
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                                <hr>
+                                                <div class="driver-info-h"><i class="fa fa-user-circle-o"
+                                                        style="font-size:18px;margin-right:6px"></i> Driver</div>
+                                                <span class="driver-detail"> {{trip.driver_name}}, {{trip.car_make}}
+                                                    {{trip.car_model}} {{trip.car_name}}</span>
+
+                                                <button (click)="rescheduleRide(index)" [hidden]="!(trip.ride_key==0)"
+                                                    *ngIf="( trip.is_schedule != '0' )" data-toggle="modal"
+                                                    data-target="#add_to_account"
+                                                    class="btn btn-primary btn-sm rreceipt">Reschedule</button>
+                                                <button (click)="cancelRidePopup(index)" data-toggle="modal"
+                                                    data-target="#confirmRideCancel"
+                                                    *ngIf="trip.ride_status != 'En Route'"
+                                                    class="btn btn-primary btn-sm viewbtn">Cancel</button>
+                                            </div>
+                                            <div class="col-sm-5 smallmap">
+                                                <img class="detialMapImage" src="{{trip.imgSourcePath}}" />
+                                            </div>
+                                            <div class="col-sm-1"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="myTrips.length == 0">
+                        <tr class="noride">
+                            <td colspan="8" class="text-center"
+                                style="color:#000; padding:20px 87px 20px 87px!important;">No Rides Yet</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div [hidden]="!showLoader" class="overlay-loader">
+    <div style="width:100%;height:100%" class="lds-rolling ">
+        <div></div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="add_to_account" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="row ">
+                <div class="col-sm-11 col-12">
+                    <button type="button" class="close" data-dismiss="modal"
+                        style="font-size:32px;float:right;padding:5px;">&times;</button>
+                    <h5 id="mtitle" style="text-align: center;">RE SCHEDULE the RIDE</h5>
+
+                </div>
+
+            </div>
+            <div class="modal-body schedule-screen ">
+
+                <div id="exTab3" class="container">
+                    <ul class="nav nav-tabs hidden">
+                        <li class="nav-item" [class]="{active: (currentTab=='1b')}">
+                            <a class="nav-link" href="javascript:;" (click)="showTab('1b')" data-toggle="tab">One
+                                Way</a>
+                        </li>
+                        <li class="nav-item" [class]="{active: (currentTab=='2b')}"><a class="nav-link"
+                                href="javascript:;" (click)="showTab('2b')" data-toggle="tab">Hourly</a>
+                        </li>
+
+                    </ul>
+
+                    <div class="tab-content ">
+                        <div class="tab-pane container active " id="1b">
+                            <form enctype="multipart/form-data" name="myForm">
+                                <!-- [submit]="myForm.$submitted&&completeUserAdd()" -->
+                                <!-- <div [hidden]="!(doc.successMsg)" class="alert alert-success text-center">
+                                    {{doc.successMsg}}
+                                </div>
+                                <div [hidden]="!(doc.errorMsg)" class="alert alert-danger text-center">{{doc.errorMsg}}
+                                </div> -->
+                                <div class="row modalrow">
+
+                                    <div class="col-sm-12">
+
+                                        <div class="row row-input">
+
+                                            <div class="col-md-6 hidden">
+
+                                                <label>Pickup Location</label>
+                                                <div class="input-container">
+                                                    <input type="text" [(ngModel)]="booking.pickup" name="pickup"
+                                                        class="form-control autocomplete" id="pickup" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 hidden">
+                                                <label>Drop Off Location</label>
+                                                <div class="input-container">
+                                                    <input type="text" [(ngModel)]="booking.drop" name="drop"
+                                                        class="form-control autocomplete" id="drop" />
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-6">
+                                                <label>Date</label>
+                                                <div class="input-container">
+
+                                                    <input type="text" [(ngModel)]="booking.date" class="form-control"
+                                                        id="date" data-format="DD-MM-YYYY" data-template="DD MMM YYYY"
+                                                        name="date">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row row-input">
+                                                    <div class="col-md-6">
+                                                        <label>Time (Hour)</label>
+
+
+                                                        <select name="time" [(ngModel)]="booking.time_hour"
+                                                            class="form-control" id="time">
+                                                            <option value="00">00 (12 AM)</option>
+                                                            <option value="01">01 (1 AM)</option>
+                                                            <option value="02">02 (2 AM)</option>
+                                                            <option value="03">03 (3 AM)</option>
+                                                            <option value="04">04 (4 AM)</option>
+                                                            <option value="05">05 (5 AM)</option>
+                                                            <option value="06">06 (6 AM)</option>
+                                                            <option value="07">07 (7 AM)</option>
+                                                            <option value="08">08 (8 AM)</option>
+                                                            <option value="09">09 (9 AM)</option>
+                                                            <option value="10">10 (10 AM)</option>
+                                                            <option value="11">11 (11 AM)</option>
+                                                            <option value="12">12 (12 PM)</option>
+                                                            <option value="13">13 (01 PM)</option>
+                                                            <option value="14">14 (02 PM)</option>
+                                                            <option value="15">15 (03 PM)</option>
+                                                            <option value="16">16 (04 PM)</option>
+                                                            <option value="17">17 (05 PM)</option>
+                                                            <option value="18">18 (06 PM)</option>
+                                                            <option value="19">19 (07 PM)</option>
+                                                            <option value="20">20 (08 PM)</option>
+                                                            <option value="21">21 (09 PM)</option>
+                                                            <option value="22">22 (10 PM)</option>
+                                                            <option value="23">23 (11 PM)</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>Minute</label>
+                                                        <select name="time" [(ngModel)]="booking.time_minutes"
+                                                            class="form-control" id="time-min">
+                                                            <option value="00">00</option>
+                                                            <option value="05">05</option>
+                                                            <option value="10">10</option>
+                                                            <option value="15">15</option>
+                                                            <option value="20">20</option>
+                                                            <option value="25">25</option>
+                                                            <option value="30">30</option>
+                                                            <option value="35">35</option>
+                                                            <option value="40">40</option>
+                                                            <option value="45">45</option>
+                                                            <option value="50">50</option>
+                                                            <option value="55">55</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row row-input">
+                                            <div class="col-md-4 ">
+                                            </div>
+                                            <div class="col-md-4 text-center btn-align">
+                                                <button type="submit" (click)="rescheduleNow()"
+                                                    class="btn btn-primary btn-md"
+                                                    [disabled]="!booking.date||!booking.time_hour||!booking.time_minutes"
+                                                    style="border:1px solid #999;">Re Schedule Ride </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-12 hidden" [hidden]="!driverselect">
+                                        <div class="row row-input">
+                                            <div class="col-md-6">
+
+                                                <label>Select Car</label>
+                                                <div class="select-container">
+                                                    <select [(ngModel)]="booking.car" class="form-control" id="car"
+                                                        name="car">
+                                                        <!-- ng-repeat="cp in corporateFareInfo track by $index" -->
+                                                        <option *ngFor="let cp of corporateFareInfo;let i=index;"
+                                                            value="{{cp.car_type}}">{{cp.car_name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Select Driver</label>
+                                                <div class="select-container">
+                                                    <select [(ngModel)]="booking.driver_id" class="form-control"
+                                                        id="car" name="car">
+                                                        <!-- ng-repeat="d in Drivers track by $index" -->
+                                                        <option *ngFor="let d of Drivers;let i=index;"
+                                                            value="{{d.driver_id}}">{{d.driver_name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row row-input hidden">
+                                            <div class="col-md-6 text-center btn-align">
+                                                <div class="form-group top-15 row row-input">
+
+                                                    <div class="col-md-6">
+                                                        <button type="submit" (click)="showLast()"
+                                                            class="btn btn-primary btn-md"
+                                                            [disabled]="!booking.pickup||!booking.drop||!booking.car"
+                                                            style="border:1px solid #999;">Next</button>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <button type="submit" (click)="showTime()"
+                                                            class="btn btn-danger btn-md"
+                                                            style="border:1px solid #999;">Back</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12 hidden" [hidden]="!lastStep">
+                                        <div class="row row-input">
+                                            <div class="col-md-12">
+                                                <h3>Please confirm your selection</h3>
+                                                <ul class="data-confirm">
+                                                    <li><strong>Pickup Location :</strong>
+                                                        {{booking.pickup_location_address}}</li>
+                                                    <li><strong>DropOff Location :</strong>
+                                                        {{booking.manual_destination_address}} </li>
+                                                    <li><strong>Date and Time:</strong> {{booking.date}}
+                                                        {{booking.time_hour}}:{{booking.time_minutes}}</li>
+                                                    <li><strong>Driver :</strong> {{booking.driver_id}}</li>
+                                                    <li><strong>Car Type:</strong> {{booking.car}}</li>
+                                                    <li><strong>Route :</strong> {{booking.roue}}</li>
+                                                    <li><strong>Toll :</strong> {{booking.toll}}</li>
+                                                    <li><strong>Estimated Distance :</strong>
+                                                        {{booking.ride_estimate_distance}}</li>
+                                                    <li><strong>Estimated Time :</strong> {{booking.ride_estimate_time}}
+                                                    </li>
+                                                    <li><strong>Estimated Fare :</strong> {{booking.estimated_fare}}
+                                                    </li>
+                                                    <li><strong>Promo Code :</strong> {{booking.promo_code}}</li>
+
+                                                </ul>
+                                            </div>
+
+                                            <div class="col-md-6 text-center btn-align">
+                                                <div class="form-group row row-input">
+
+                                                    <div class="col-md-6">
+                                                        <button type="submit" (click)="BookRideNow()"
+                                                            class="btn btn-primary btn-md"
+                                                            [disabled]="!booking.pickup||!booking.drop||!booking.car"
+                                                            style="border:1px solid #999;">Confirm</button>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <button type="submit" (click)="showDriver()"
+                                                            class="btn btn-danger btn-md"
+                                                            style="border:1px solid #999;">Back</button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane container" id="2b" ng-class="{active: (currentTab=='2b')}">
+                            NOTHING TO DISPLAY HERE
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div id="confirmRideCancel" class="modal" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"
+                    style="margin-top:-4px;font-size: 1.7em;margin-right: 4px;">&times;</button>
+                <div style="text-align: center; margin-bottom:50px">
+                    <p class="modal-title" style="margin-top: 40px;font-size: 18px; font-weight: 400;">Are you sure you
+                        want to cancel the {{(tripTypeCancel == '0') ? 'Regular' : 'Scheduled'}} ride?</p>
+                </div>
+                <div style="text-align: center; margin-bottom: 25px;" class="logoutbtn">
+                    <button class="btn btn-outline login_button button-blue" data-dismiss="modal" type="submit"
+                        style="padding: 7px 33px 7px 33px; border:1px solid #aaa; text-shadow: none;">No</button>
+                    <button class="btn btn-primary login_button button-black" data-dismiss="modal"
+                        (click)="cancelRide(triptoCancel)" type="submit"
+                        style="padding:7px 33px 7px 33px; margin-right:7px;">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

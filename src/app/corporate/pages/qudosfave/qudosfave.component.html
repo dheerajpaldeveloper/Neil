@@ -1,0 +1,156 @@
+<div class="container page" id="Trips">
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <a class="btn btn-outline-primary btn-md tripsbtn " style="float:left; margin-right:20px;"
+                            [routerLink]="['/', 'corporate', 'my-qudos-fave']" id="drivertripsbtnicon">My QudosFave <img
+                                src="/assets/images/caricongrey.png" style="padding-left:10px;" id="drivercariconbtn">
+                        </a>
+
+                        <a class="btn btn-outline-primary btn-md tripsbtn active-page"
+                            data-hover="images/caricongrey.png" data-unhover="images/caricon.png" style="float:left; "
+                            [routerLink]="['/', 'corporate', 'qudos-fave']" id="drivertripsbtnicon">QudosFave
+                            Drivers<img src="/assets/images/caricongrey.png" style="padding-left:10px;"
+                                id="drivercariconbtn">
+                        </a>
+                    </div>
+
+                    <div class="col-md-2"></div>
+
+                    <div class="col-md-4 search-div">
+                        <input type="text" placeholder="Search name, car, affiliate"
+                            class="input form-control field spacing" (change)="initTable(1)"
+                            ng-model-options="{ debounce: 1200 }" (change)="checkClear()" [(ngModel)]="searchuser" />
+                    </div>
+
+                    <div class="col-md-3 hidden">
+                        <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn" [hidden]="!(currentPage>1)"
+                            (click)="pageChanged(currentPage-1)">Prev</button>
+                        <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn" [disabled]="hideNext"
+                            (click)="pageChanged(currentPage+1)">Next</button>
+                        <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn" (click)="openAddUser()">Add
+                            User</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tables
+    ================================================== -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+            </div>
+            <table class="table table-responsive trips dtrips">
+                <thead>
+                    <tr class="frow">
+                        <th class="not-that-first" scope="col">ID</th>
+                        <th scope="col">Driver Image</th>
+                        <th scope="col">Driver Name</th>
+                        <th scope="col">Car Details</th>
+                        <th scope="col">Zip Code</th>
+                        <th class="text-center" scope="col">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody *ngIf="Users == null || Users == undefined">
+                    <tr>
+                        <td colspan="6" class="text-center">
+                            <i class="fa fa-spinner fa-spin" style="font-size:130%"></i>
+                        </td>
+                    </tr>
+                </tbody>
+
+                <tbody *ngIf="Users.length > 0">
+                    <!-- ng-repeat="doc in Users | filter:searchuser track by $index " -->
+                    <tr *ngFor="let doc of Users;let i=index;">
+                        <td>{{doc.driver_id}}</td>
+                        <td class="circular">
+                            <div class="d-image"><img class="img-sm  img-responsive" src="{{doc.driver_image}}"
+                                    alt="driver - {{doc.driver_name}}" /></div>
+                        </td>
+                        <td>
+                            <div class="word-break mw-300">{{doc.driver_name}}</div>
+                        </td>
+                        <td>{{doc.car_make}} {{doc.car_model}} {{doc.car_color}} {{doc.car_year}}</td>
+                        <td>{{doc.zipcode}}</td>
+                        <td><button class="btn btn-outline-primary btn-md adddocbtn btnSpacing" data-toggle="modal"
+                                data-target="#confirmUserAdd" (click)="addtoAccount(doc)">Add to my account</button>
+                        </td>
+                    </tr>
+                    <tr [hidden]="hideLoadMore">
+                        <td colspan="6" class="text-center"><button class="load-more-btn" [disabled]="DisableLoadMore"
+                                (click)="loadMore()">Load More</button></td>
+                    </tr>
+                </tbody>
+
+                <tbody *ngIf="Users.length == 0">
+                    <tr>
+                        <td colspan="6" class="text-center">No Driver Found</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+<div id="confirmUserAdd" class="modal" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-auto modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content shadow">
+
+            <div class="mx-5 mt-5 mb-2 title">
+                Add to favorite list?
+            </div>
+
+            <!-- <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"
+                    style="margin-top:-4px;font-size: 1.7em;margin-right: 4px;">&times;</button>
+                <div style="text-align: center; margin-bottom:50px">
+                    <p class="modal-title" style="margin-top: 40px;font-size: 20px; font-weight: 400;">Are you sure you
+                        want to add<br> <span class="favname word-break">{{toBeAdded|uppercase}}</span><br> to your
+                        favorite list?</p>
+
+                </div>
+                <div style="text-align: center; margin-bottom: 25px;" class="logoutbtn">
+                    <button class="btn btn-outline login_button button-black" data-dismiss="modal" type="submit"
+                        style="padding: 7px 33px 7px 33px; border:1px solid #aaa; text-shadow: none;margin-right:6px;">Cancel</button>
+
+                    <button class="btn btn-primary login_button button-blue" data-dismiss="modal"
+                        (click)="addtoAccountConfirmed(driver_toAdd)" type="submit"
+                        style="padding:7px 33px 7px 33px; margin-right:7px;">Yes</button>
+
+                </div>
+            </div> -->
+            <div class="modal-body p-0">
+                <hr class="confirm mb-0">
+                <div class="message-bg">
+                    <div class="message p-5">
+                        Are you sure you want to add <strong> {{toBeAdded|uppercase}} </strong> to your
+                        favorite list?
+                    </div>
+                </div>
+                <hr class="confirm mt-0">
+
+                <div align="center" class="m-3 mb-4">
+                    
+                    <button class="btn btn-primary btn-left m-2 px-3 py-1" data-dismiss="modal" type="submit">
+                        Cancel
+                    </button>
+
+                    <button class="btn btn-secondary btn-right m-2 px-3 py-1" (click)="addtoAccountConfirmed(driver_toAdd)" 
+                    data-dismiss="modal">
+                        Yes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,320 @@
+<header class="header header--white">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="header__content">
+                    <a href="javascript:;" (click)="homelink()" class="header__logo">
+                        <img src="/assets/img/logo--white.svg" alt='logo'>
+                        <!--  <object type="image/svg+xml" data="img/logo--white.svg"></object> -->
+                        <!-- <object type="image/svg+xml" data="img/logo--black.svg"></object>  -->
+                        <!-- <object type="image/svg+xml" data="img/logo--white.svg"></object>  -->
+                    </a>
+
+                    <nav class="header__nav">
+                        <!--<a href="driverlogin.html">Drive</a>
+                            <a href="riderlogin.html">Ride</a>-->
+                        <a href="javascript:;" (click)="homelink()">Home</a>
+
+                        <div class="header__social">
+                            <a href="https://twitter.com/ridequdos"><i class="icon-tw"></i></a>
+                            <a href="https://www.facebook.com/QudosRide/"><i class="icon-fb"></i></a>
+                            <a href="https://www.linkedin.com/company/ridequdos/"><i class="icon-linkedin"></i></a>
+                            <a href="https://www.instagram.com/qudosride/"><i class="icon-instagram"></i></a>
+                        </div>
+                    </nav>
+
+                    <button class="header__menu" type="button">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="sign">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-xl-10 offset-xl-1">
+                <div class="sign__content">
+
+                    <!--Start Row Sign Up-->
+                    <div class="row">
+
+                        <div class="popup-main-content">
+
+                            <div [hidden]="!success">
+
+                                <!--Start Sign up Step 5-->
+                                <div id="signup-4" [hidden]="!(!signup1&&!signup2&&!signup3&&signup4&&otpVerified)"
+                                    class="row row-input">
+                                    <div class="col-md-12">
+                                        <p class="small-show"><img src="/assets/img/mail-sucess.png" alt="sucess"> </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3>Welcome to Qudos</h3>
+                                        <p class="top-margin">Please verify email by clicking on the link sent to the
+                                            email you provided.</p>
+                                        <div class="row clear">
+                                            <div class="col-md-6">
+                                                <a [routerLink]="'/corporate_login'" class="submit-login">Login</a>
+                                            </div>
+                                            <div class="col-md-6" style="visibility: hidden">
+                                                <a href="#" class="submit-veri">Resend Verification</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 small-hide">
+                                        <p align="center"><img src="/assets/img/mail-sucess.png" width="200"
+                                                height="200" alt="sucess">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div [hidden]="!!success">
+
+                                <div class="row row-input">
+
+                                    <div id="main-hidden" class="col-md-5">
+                                        <h3 id="signup-title">Corporate Sign Up</h3>
+                                        <ul id="ny" [hidden]="!!signup4" class="signup-step">
+                                            <li id="li-step0" (click)="showStep1()" [ngClass]="{active: signup1 == 1}">
+                                                <a id="0-step"></a>
+                                            </li>
+                                            <li id="li-step1" (click)="showSignup2()"
+                                                [ngClass]="{active: signup2 == 1}"><a id="1-step"></a></li>
+                                            <!--<li id="li-step2"><a id="2-step"></a></li>-->
+                                            <li id="li-step3" (click)="showSignup3()"
+                                                [ngClass]="{active: signup3 == 1}"><a id="3-step"></a></li>
+                                        </ul>
+                                        <ul id="no-ny" [hidden]="!!signup4" class="signup-step hidden">
+                                            <li id="li-step4"><a id="4-step"></a></li>
+                                            <li id="li-step5" class="active"><a id="5-step"></a></li>
+                                            <li id="li-step6"><a id="6-step"></a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div id="main-hidden1" class="col-md-7">
+                                        Qudos builds the best platform for our corporates to cater to their car service
+                                        needs.
+                                    </div>
+                                    <div id="signup-1" [hidden]="!signup1"
+                                        style="position:relative; float:left; width:100%;" class="">
+                                        <div class="col-md-6">
+                                            <label>Which Country are you?</label>
+
+                                            <select id="select-state" [(ngModel)]="loginUser.country_id"
+                                                (change)="countryChanged()" class="select-state" name="country">
+                                                <option [value]="country.country_id"
+                                                    *ngFor="let country of countries; trackBy: trackById">
+                                                    {{country?.country_name }}</option>
+                                            </select>
+
+                                            <div class="select-state-spot"></div>
+                                            <button id="first-step" (click)="countries.length > 0 ? showSignup2(): ''"
+                                                class="submit loginButton mb-2">Next</button>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--End Sign up Step 1-->
+
+
+                                <!--Start Sign up Step 2-->
+                                <div id="signup-2" [hidden]="!(!signup1&&signup2&&!signup3)" class="row row-input ">
+
+                                    <div class="row row-input">
+                                        <div class="col-md-6">
+                                            <label>Business Name</label>
+                                            <span class="icon_input_signup position-absolute"><img
+                                                    src="/assets/img/user.png"></span>
+
+                                            <input required id="fname" autocomplete="disabled"
+                                                [class]="isNameHighlighted?'user-input highlight':' user-input'"
+                                                [(ngModel)]="loginUser.first_name" name="fname" type="text"
+                                                placeholder="Enter Business Name" 
+                                                (keypress)="onNameChange($event)">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label>Business Entity</label>
+                                            <span class="icon_input_signup position-absolute"><img
+                                                    src="/assets/img/user.png"></span>
+
+                                            <input id="lname" autocomplete="disabled"
+                                                [class]="isEntityHighlighted?'user-input highlight':' user-input'"
+                                                name="lname" [(ngModel)]="loginUser.last_name" type="text"
+                                                placeholder="LLC, Inc etc..." 
+                                                (keypress)="onEntityChange($event)">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row row-input">
+                                        <div class="col-md-6">
+                                            <label>Mobile Number</label>
+                                            <div class="row-input">
+                                                <ngx-intl-tel-input [cssClass]="'custom'" [attr.autocomplete]="false"
+                                                    [resetSearchContainer]="true"
+                                                    [class]="isPhoneHighlighted?'phone-highlight':''"
+                                                    [preferredCountries]="preferredCountries"
+                                                    [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
+                                                    [searchCountryFlag]="true"
+                                                    [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                                    [selectFirstCountry]="false" [selectedCountryISO]="countryToSet"
+                                                    [maxLength]="maxlength" [tooltipField]="TooltipLabel.Name"
+                                                    [phoneValidation]="true" [separateDialCode]="separateDialCode"
+                                                    name="phone" [inputId]="'mobile'" [formControl]="mobileNumber"
+                                                    (countryChange)="countryChanged($event)"
+                                                    (keypress)="onPhoneChange($event)">
+                                                </ngx-intl-tel-input>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label>Email Address</label>
+                                            <span class="icon_input_signup position-absolute"><img
+                                                    src="/assets/img/mail.png"></span>
+
+                                            <input id="email"
+                                                [class]="isEmailHighlighted?'email-add highlight':'email-add'"
+                                                [(ngModel)]="loginUser.user_email" name="lname" type="text"
+                                                placeholder="Enter your email" autocomplete="disabled"
+                                                (keypress)="onEmailChange($event)">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row row-input">
+                                        <div class="col-md-6">
+                                            <label>Password</label>
+                                            <span class="icon_input_signup position-absolute"><img
+                                                    src="/assets/img/key.png"></span>
+
+                                            <input required id="password" [(ngModel)]="loginUser.password"
+                                                [class]="isPasswordHighlighted?'user-input highlight':' user-input'"
+                                                name="password" type="password" placeholder="Password"
+                                                autocomplete="new-password" (keypress)="onPassChange($event)">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label>Confirm Password</label>
+                                            <span class="icon_input_signup position-absolute"><img
+                                                    src="/assets/img/key.png"></span>
+
+                                            <input id="passwordc"
+                                                [class]="isPassComHighlighted?'user-input highlight':' user-input'"
+                                                [(ngModel)]="loginUser.confirm_password" name="passwordc"
+                                                type="password" placeholder="Confirm Password"
+                                                autocomplete="disabled" (keypress)="onPassComChange($event)">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row row-input">
+
+                                        <div class="col-md-6">
+                                            <label>Select State</label>
+                                            <select id="my-state" [(ngModel)]="loginUser.state_id"
+                                                (change)="stateChanged()" class="select-state" name="state">
+                                                <option *ngFor="let state of states; trackBy: trackByStateId">
+                                                    {{state.state_name}}</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label>Zip Code</label>
+                                            <span class="icon_input_signup position-absolute"><img
+                                                    [src]="'/assets/img/spot.png'"></span>
+
+                                            <input [(ngModel)]="loginUser.zip_code" id="zip"
+                                                [class]="isZipHighlighted?'zip highlight':'zip'" type="text"
+                                                [maxlength]="6" (change)="checkZip()" ngModelOptions="{ debounce: 200 }"
+                                                (keypress)="isNumberKeys($event)" inputmode="numeric"
+                                                placeholder="Your Area ZIP code" autocomplete="disabled">
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row row-input">
+                                        <div class="col-md-6">
+                                            <label>Referring code</label>
+                                            <input id="referral" class="user-input" name="referral" type="text"
+                                                placeholder="Optional" autocomplete="disabled">
+                                        </div>
+                                    </div>
+
+                                    <div class="row row-input">
+
+                                        <div class="col-md-6 but-next">
+                                            <button style="width: 250px;margin-bottom: 25px;" type="button"
+                                                [disabled]="onloadotp" (click)="sendOtp()"
+                                                class="loginButton submit">Send OTP</button>
+
+                                            <p>Already have an account? <a
+                                                    [routerLink]="'/corporate_login'"><strong>Login</strong></a></p>
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <div *ngIf="loadings" class="loaders"> <span><img
+                                                src="/assets/app-img/ring-alt.svg"></span>
+                                    </div>
+                                </div>
+
+
+                                <div id="signup-3" [hidden]="!(!signup1&&!signup2&&signup3&&otpSent&&!otpVerified)"
+                                    class="row row-input">
+
+                                    <div class="col-md-6 top-margin">
+                                        <p><strong>Confirm your Mobile Number</strong></p>
+                                        <label>Enter OTP sent to your Mobile number</label>
+                                        <input type="text" id="otp" [(ngModel)]="otp" name="verify-phone"
+                                            (keypress)="isNumberKeys($event)" class="phone-verify" placeholder="0000"
+                                            maxlength="4" inputmode="numeric">
+
+                                        <div class="row row-input a-color">
+                                            <div class="col-xs-5"><button class="btn-links" id="resendOtp"
+                                                    [disabled]="DisableResnd" (click)="regenerateOTP()"
+                                                    href="javascript:void(0)">Resend
+                                                    OTP</button></div>
+                                            <div class="col-xs-7"><a id="changeMobile" (click)="showSignup2()"
+                                                    href="javascript:void(0)">Change Mobile number</a></div>
+                                            <!-- [ngClass]="{regenerateOTP: addInviteesDisabled()}" -->
+                                        </div>
+
+                                        <div class="row row-input top-margin">
+                                            <button id="fourth-step" (disabled)="DisableCCA" (click)="verifyOTP();"
+                                                class="submit">Create Corporate Account</button>
+                                        </div>
+
+                                        <div class="row row-input top-margin a-color">
+                                            <p>Already have an account? <a
+                                                    [routerLink]="'/corporate_login'"><strong>Login</strong></a></p>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="loadings" class="loaders"> <span><img
+                                                src="/assets/app-img/ring-alt.svg"></span>
+                                    </div>
+
+                                </div>
+                                <!--End Sign Up Step 4-->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

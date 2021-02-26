@@ -1,0 +1,338 @@
+<div class="container page" id="Trips">
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a class="btn btn-outline-primary btn-md tripsbtn active-page"
+                            [routerLink]="['/', 'corporate', 'myUsers']" style="float:left; margin-right:20px;"
+                            id="drivertripsbtnicon">My Users<img src="/assets/images/network.png"
+                                style="padding-left:10px;" id="drivercariconbtn"></a>
+                        <a class="btn btn-outline-primary btn-md tripsbtn " data-hover="/assets/images/network.png"
+                            data-unhover="/assets/images/network.png" [routerLink]="['/', 'corporate', 'allUsers']"
+                            id="drivertripsbtnicon">All
+                            Users<img src="/assets/images/network.png" style="padding-left:10px;"
+                                id="drivercariconbtn"></a>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5 row pull-right  search-div">
+                        <div class="col-md-8">
+                            <span class="search-icon"><i class="fa fa-search"></i></span>
+                            <input type="text" placeholder="Search name, mobile no."
+                                name="user-search" class="input form-control field search-ng"
+                                [(ngModel)]="searchuser" [formControl]="searchForm" />
+                        </div>
+                        <div class="col-md-4 spacing">
+                            <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn"
+                                (click)="openAddUser()">New User</button>
+                        </div>
+                    </div>
+                    <div class="col-md-5 text-right hidden">
+                        <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn" [hidden]="!(currentPage>1)"
+                            (click)="pageChanged(currentPage-1)">Prev</button>
+                        <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn pull-right"
+                            [disabled]="hideNext" (click)="pageChanged(currentPage+1)">Next</button>
+                        <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn" (click)="openAddUser()">New
+                            User</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tables
+          ================================================== -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+            </div>
+            <table class="table table-responsive trips dtrips">
+                <thead>
+                    <tr class="frow">
+                        <th class="desktop" scope="col">ID</th>
+                        <th scope="col">User Details</th>
+                        <th class="desktop text-center" scope="col">Email</th>
+                        <th scope="col">Payment</th>
+                        <th class="text-center" scope="col">Action</th>
+                        <th scope="col">Account</th>
+                    </tr>
+                </thead>
+                
+                <tbody *ngIf="Users == null || Users == undefined">
+                    <tr>
+                        <td colspan="6" class="text-center">
+                            <i class="fa fa-spinner fa-spin" style="font-size:130%"></i>
+                        </td>
+                    </tr>
+                </tbody>
+
+                <tbody *ngIf="Users&&Users.length > 0">
+                    <!-- ng-repeat="doc in Users | filter:searchuser track by $index" -->
+                    <tr *ngFor="let doc of Users;let i=index;">
+                        <td class="desktop">{{doc.user_id}}</td>
+                        <td class="pad-left-mob"><span class="usr_name">{{doc.user_name}}</span><br>{{doc.user_mobile}}
+                        </td>
+                        <td class="desktop text-center">{{doc.user_email}}</td>
+                        <td>
+                            <a *ngIf="(doc.last4_digits == null)" href="javascript:;"
+                                (click)="addUserPayment(doc.user_id)" data-toggle="modal" data-target="#add_user_card"
+                                class="btn btn-outline-primary btn-md bookButton button-blue">Add Payment</a>
+                            <span *ngIf="(doc.last4_digits != null)">**{{doc.last4_digits}}</span>
+                        </td>
+                        <td class="text-center">
+                            <!-- <a href="javascript:;" (click)="BookUserRide(doc.user_mobile)" data-toggle="modal" data-target="#add_to_account"   class="btn btn-outline-primary btn-md bookButton">Book a Ride</a></td> -->
+                            <a href="javascript:;" (click)="BookUserRide(doc)"
+                                class="btn btn-outline-primary btn-md bookButton">Book a Ride</a>
+                        </td>
+                        <td>
+                            <a href="javascript:;" class="btn btn-outline-primary btn-md button-green "
+                                (click)="deleteUser(doc)">Delete</a>
+                        </td>
+                    </tr>
+                    <tr [hidden]="hideLoadMore">
+                        <td colspan="6" class="text-center"><button class="load-more-btn" [disabled]="DisableLoadMore"
+                                (click)="loadMore()">Load More</button></td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="Users&&Users.length == 0">
+                    <tr>
+                        <td colspan="6" class="text-center">No User Found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="emailUpdateforUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="row modaltitle" style="float: right;padding: 0;padding-right: 6px;">
+                <div class="col-sm-12">
+                    <button type="button" class="close" data-dismiss="modal"
+                        style="font-size:32px;float:right;padding:5px;">&times; &nbsp;</button>
+                </div>
+            </div>
+
+            <div class="modal-body ">
+                <div class="row modalrow">
+                    <div class="col-sm-8 col-sm-offset-3" style="margin:0 auto;">
+                        <div class="input-container ">
+                            <input type="email" placeholder="Enter Email" [(ngModel)]="cardForEmail"
+                                [ngModelOptions]="{standalone: true}" class="form-control  emailinput" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3 text-center">
+                        <button data-dismiss="modal" class="btn ride-confirm-btn button-black ">Cancel</button>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <button (click)="updateUser();" class="btn btn-primary ride-confirm-btn ">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="add_to_account" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="row ">
+                <div class="col-sm-11 col-12">
+                    <button type="button" class="close" data-dismiss="modal"
+                        style="font-size:32px;float:right;padding:5px;">&times;</button>
+                    <h5 id="mtitle" style="text-align: center;">SCHEDULE A RIDE</h5>
+                </div>
+            </div>
+            <div class="modal-body schedule-screen ">
+                <div id="exTab3" class="container">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item" [ngClass]="{active: (currentTab=='1b')}">
+                            <a class="nav-link" href="javascript:;" (click)="showTab('1b')" data-toggle="tab">One
+                                Way</a>
+                        </li>
+                        <li class="nav-item" [ngClass]="{active: (currentTab=='2b')}"><a class="nav-link"
+                                href="javascript:;" (click)="showTab('2b')" data-toggle="tab">Hourly</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content ">
+                        <div class="tab-pane container " [ngClass]="{active: (currentTab=='1b')}" id="1b">
+                            <form enctype="multipart/form-data" name="myForm"
+                                (submit)="myForm.$submitted&&completeUserAdd()">
+                                <!-- <div [hidden]="!doc.successMsg" class="alert alert-success text-center">
+                                    {{doc.successMsg}}
+                                </div> -->
+                                <!-- <div [hidden]="!doc.errorMsg" class="alert alert-danger text-center">{{doc.errorMsg}}
+                                </div> -->
+                                <div class="row modalrow">
+                                    <div class="col-sm-12">
+                                        <div class="row row-input">
+                                            <div class="col-md-6">
+                                                <label>Pickup Location</label>
+                                                <div class="input-container">
+                                                    <input type="text" [(ngModel)]="booking.pickup"
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        class="form-control autocomplete" id="pickup" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Drop Off Location</label>
+                                                <div class="input-container">
+                                                    <input type="text" [(ngModel)]="booking.drop" name="drop"
+                                                        class="form-control autocomplete" id="drop" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Date</label>
+                                                <div class="input-container">
+                                                    <input type="text" [(ngModel)]="booking.date" class="form-control"
+                                                        id="date" data-format="DD-MM-YYYY" data-template="DD MMM YYYY"
+                                                        name="date">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row row-input">
+                                                    <div class="col-md-6">
+                                                        <label>Time (Hour)</label>
+                                                        <select name="time" [(ngModel)]="booking.time_hour"
+                                                            class="form-control" id="time">
+                                                            <option value="00">00 (12 AM)</option>
+                                                            <option value="01">01 (1 AM)</option>
+                                                            <option value="02">02 (2 AM)</option>
+                                                            <option value="03">03 (3 AM)</option>
+                                                            <option value="04">04 (4 AM)</option>
+                                                            <option value="05">05 (5 AM)</option>
+                                                            <option value="06">06 (6 AM)</option>
+                                                            <option value="07">07 (7 AM)</option>
+                                                            <option value="08">08 (8 AM)</option>
+                                                            <option value="09">09 (9 AM)</option>
+                                                            <option value="10">10 (10 AM)</option>
+                                                            <option value="11">11 (11 AM)</option>
+                                                            <option value="12">12 (12 PM)</option>
+                                                            <option value="13">13 (01 PM)</option>
+                                                            <option value="14">14 (02 PM)</option>
+                                                            <option value="15">15 (03 PM)</option>
+                                                            <option value="16">16 (04 PM)</option>
+                                                            <option value="17">17 (05 PM)</option>
+                                                            <option value="19">19 (07 PM)</option>
+                                                            <option value="19">19 (07 PM)</option>
+                                                            <option value="20">20 (08 PM)</option>
+                                                            <option value="21">21 (09 PM)</option>
+                                                            <option value="22">22 (10 PM)</option>
+                                                            <option value="23">23 (11 PM)</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>Minute</label>
+                                                        <select name="time" [(ngModel)]="booking.time_minutes"
+                                                            class="form-control" id="time-min">
+                                                            <option value="00">00</option>
+                                                            <option value="05">05</option>
+                                                            <option value="10">10</option>
+                                                            <option value="15">15</option>
+                                                            <option value="20">20</option>
+                                                            <option value="25">25</option>
+                                                            <option value="30">30</option>
+                                                            <option value="35">35</option>
+                                                            <option value="40">40</option>
+                                                            <option value="45">45</option>
+                                                            <option value="50">50</option>
+                                                            <option value="55">55</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row row-input">
+                                            <div class="col-md-4 text-center btn-align">
+                                                <button type="submit" (click)="reScheduleNow()"
+                                                    class="btn btn-primary btn-md"
+                                                    [disabled]="!booking.date||!booking.time_hour||!booking.time_minutes"
+                                                    style="border:1px solid #999;">ReSchedule Now</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane container" id="2b" [ngClass]="{active: (currentTab=='2b')}">
+                            NOTHING TO DISPLAY HERE
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="add_user_card" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="row modaltitle">
+                <div class="col-sm-11 col-12">
+                    <button type="button" class="close" data-dismiss="modal"
+                        style="font-size:32px;float:right;padding:5px;">&times;</button>
+                    <h5 id="mtitle" style="text-align: center;font-size: 19px;">Add Card </h5>
+                </div>
+            </div>
+            <div class="modal-body modal-lg">
+                <div class="col-sm-12">
+                    <form enctype="multipart/form-data" action="#" method="post" name="myForm" id="payment-form">
+                        <div class="row modalrow">
+                            <div class="col-sm-12 text-center">
+                                <div id="card-element">
+                                    <!-- A Stripe Element will be inserted here. -->
+                                    <iframe frameborder="0" allowtransparency="true" scrolling="no"
+                                        name="__privateStripeFrame35220" allowpaymentrequest="true"
+                                        src="https://js.stripe.com/v3/elements-inner-card-446a3597526e5cd55d5f68e47d59a688.html#style[base][fontSize]=16px&amp;style[base][color]=%2332325d&amp;componentName=card&amp;wait=false&amp;rtl=false&amp;keyMode=test&amp;apiKey=pk_test_x0nIalqvXaliqoYO9Qdcb94Q&amp;origin=http%3A%2F%2F127.0.0.1%3A8887&amp;referrer=http%3A%2F%2F127.0.0.1%3A8887%2F%23%2Fcorporate%2FlistCards&amp;controllerId=__privateStripeController35216"
+                                        title="Secure card payment input frame"
+                                        style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; transform: translateZ(0px) !important; height: 19.2px;"></iframe><input
+                                        class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" "
+                                        autocomplete="false" maxlength="1"
+                                        style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: 0px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 text-center ">
+                                <!-- Used to display Element errors. -->
+                                <div id="card-errors" role="alert"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 addbtn">
+                                <div class="btn-align">
+                                    <button type="submit"
+                                        class="button submit btn btn-primary btn-md button-spacing">Save
+                                        Card</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- <script>
+    function WindowCloseHanlder() {
+        console.log("web access token is getting removed");
+        App.controller('driverTripsController', function ($rootScope, $scope, $http, $cookies, $cookieStore, MY_CONSTANT, $state, ngDialog) {
+            if (!$cookieStore.get('web_access_token')) {
+                window.location.href = 'http://ridequdos.com/driverlogin.html';
+            }
+        });
+    }
+</script> -->

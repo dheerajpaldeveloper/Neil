@@ -1,0 +1,126 @@
+<div class="container page" id="Trips">
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="row">
+                    <div class="col-md-8">
+                        <a class="btn btn-outline-primary btn-md tripsbtn " data-hover="assets/images/caricongrey.png"
+                            data-unhover="assets/images/caricon.png" style="float:left; margin-right:20px;"
+                            [routerLink]="['/', 'corporate', 'listCards']" id="drivertripsbtnicon">My Cards<img
+                                src="assets/images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+                        <a class="btn btn-outline-primary btn-md tripsbtn " *ngIf="driverDetails.subtype_id == 1"
+                            data-hover="images/caricongrey.png" data-unhover="assets/images/caricon.png"
+                            style="float:left; margin-right:20px;" [routerLink]="['/', 'corporate', 'bank-details']"
+                            id="drivertripsbtnicon">Bank Details<img src="assets/images/document1.png"
+                                style="padding-left:10px;" id="drivercariconbtn"></a>
+
+                        <a class="btn btn-outline-primary btn-md tripsbtn " data-hover="images/caricongrey.png"
+                            data-unhover="images/caricon.png" style="float:left; margin-right:20px;"
+                            [routerLink]="['/', 'corporate', 'documents']" id="drivertripsbtnicon">My Documents<img
+                                src="assets/images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+
+                        <a class="btn btn-outline-primary btn-md tripsbtn active-page"
+                            data-hover="images/caricongrey.png" data-unhover="images/caricon.png"
+                            style="float:left; margin-right:20px;" [routerLink]="['/', 'corporate', 'staff']"
+                            id="drivertripsbtnicon">My Staff<img src="assets/images/document1.png"
+                                style="padding-left:10px;" id="drivercariconbtn"></a>
+
+                        <!-- <a class="btn btn-outline-primary btn-md tripsbtn active-page"
+                            style="float:left; margin-right:20px;" [routerLink]="['/', 'corporate', 'settings']"
+                            id="drivertripsbtnicon">More <i
+                                style=" font-size: 21px;    vertical-align: middle;    margin-left: 5px;"
+                                class="fa fa-cog"></i></a> -->
+
+                    </div>
+                    <div class="col-md-4 pull-right">
+                        <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn" data-toggle="modal"
+                            data-target="#add_to_account">Add Staff</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tables
+    ================================================== -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+            </div>
+            <table class="table table-responsive trips desktop">
+                <thead>
+                    <tr class="frow">
+                        <th scope="col">ID</th>
+                        <th scope="col">User Details</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Account</th>
+                        <!--<th scope="col">Reminder Days</th>-->
+                    </tr>
+                </thead>
+                <tbody *ngIf="docs.length > 0">
+                    <!-- ng-repeat="doc in docs track by $index" -->
+                    <tr *ngFor="let doc of docs; let i=index;">
+                        <td>{{doc.doc_id}}</td>
+                        <td>{{doc.document_name}}</td>
+
+                        <td>{{doc.date_added|date:'MMM dd yyyy,'}} <br>{{doc.date_added|date:'hh:mm a'}}</td>
+
+                        <td><a href="javascript:;" class="btn btn-outline-primary btn-md button-green"
+                                (click)="deleteStaff(doc)">Delete</a></td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="docs.length == 0">
+                    <tr>
+                        <td colspan="4" class="text-center">No Staff Found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="add_to_account" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <h4>Add Staff to Account</h4>
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="row modaltitle">
+                <div class="col-sm-12 col-12">
+                    <button type="button" class="close" data-dismiss="modal"
+                        style="font-size:32px;float:right;padding:5px;">&times;</button>
+                    <h5 id="mtitle" style="text-align: center;font-size: 19px;">Add Staff to Account</h5>
+                </div>
+            </div>
+            <div class="modal-body ">
+                <div class="row modalrow">
+                    <div class="col-sm-6 text-center col-sm-offset-3">
+                        <label class="text-style">Enter OTP</label>
+                        <div class="input-container text-center">
+                            <input type="text" placeholder="0000" [(ngModel)]="otpToAdd"
+                                class="form-control  text-center otpFields">
+                            <input type="hidden" [(ngModel)]="userToAdd" class="form-control  ">
+                            <input type="hidden" [(ngModel)]="userMobileToAdd" class="form-control  ">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 text-center col-sm-offset-3">
+                        <div class="text-center">
+                            <a href="javascript:;" class="callToAction text-style"
+                                (click)="reAddUser(userInProcess);">Resend
+                                OTP</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 addbtn">
+                        <div class="btn-align">
+                            <button type="submit" (click)="completeUserAdd()" class="btn btn-primary btn-md"
+                                style="border:1px solid #999;padding-top:10px;padding-bottom: 10px;">Add Staff</button>
+                            <!-- [disabled]="submitText!='Submit'" -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

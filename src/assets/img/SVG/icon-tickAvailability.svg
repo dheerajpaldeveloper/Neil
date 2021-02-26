@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="12px" height="10px" viewBox="0 0 12 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: sketchtool 3.5.2 (25235) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_tick</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="educator" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="14_availability" sketch:type="MSArtboardGroup" transform="translate(-491.000000, -1241.000000)" fill="#29ABE2">
+            <g id="Group" sketch:type="MSLayerGroup" transform="translate(208.000000, 1100.000000)">
+                <g id="ticks" transform="translate(283.000000, 81.000000)" sketch:type="MSShapeGroup">
+                    <path d="M11.8693125,61.5517385 L10.5331875,60.1265077 C10.3750529,59.9578308 10.1186394,59.9578308 9.96050481,60.1265077 L4.39463942,66.0634923 L2.02735096,63.5384462 C1.86927404,63.3697692 1.61283173,63.3697692 1.45472596,63.5384462 L0.118600962,64.9636769 C-0.0395336538,65.1323231 -0.0395336538,65.4058308 0.118600962,65.5745077 L4.10834135,69.8302 C4.18740865,69.9145692 4.29105288,69.9567231 4.39466827,69.9567231 C4.4983125,69.9567231 4.60195673,69.9145692 4.68099519,69.8302 L11.8693125,62.1625385 C11.9452644,62.0815538 11.987899,61.9716769 11.987899,61.8571538 C11.9879279,61.7425692 11.9452644,61.6327538 11.8693125,61.5517385 L11.8693125,61.5517385 Z" id="icon_tick"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

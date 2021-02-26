@@ -1,0 +1,404 @@
+<div class="navbar navbar-expand-lg fixed-top header">
+    <div class="container-fluid">
+        <nav class="head__nav navbar navbar-dark">
+            <div id="mynav">
+                <ul class="mybar" id="head" style="padding-left: 0px;">
+
+                    <li class=" hidden under" style="display:none; margin-left:-10px;">
+                        <a class="head__open" [routerLink]="['/', 'corporate', 'liveTracking']"><img
+                                src="/assets/images/livemap.png">&nbsp; Live
+                            Map</a>
+                    </li>
+
+                    <li class="under" style="margin-left:-10px;">
+                        <a class="head__open" [routerLink]="['/', 'corporate', 'trips']"><img
+                                src="/assets/images/location1.png">&nbsp;Trips</a>
+                    </li>
+
+                    <li class="under dropdown" style="margin-left:-10px;">
+                        <a class="dropdown-toggle" href="javascript:;" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"><img src="/assets/images/network.png">&nbsp;
+                            Network</a>
+                        <ul class="dropdown">
+                            <li> <a class="" [routerLink]="['/', 'corporate', 'myUsers']"><img
+                                        src="/assets/images/network.png">&nbsp; Users</a>
+                            </li>
+                            <li> <a class="" [routerLink]="['/', 'corporate', 'my-qudos-fave']"><img
+                                        src="/assets/images/network.png">&nbsp;
+                                    QudosFave</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="under" style="margin-left:-10px;">
+                        <a class="head__open" [routerLink]="['/', 'corporate', 'settings']">
+                            <!-- <img src="/assets/images/settings.png">  -->
+                            <i class="fa fa-settings"></i>
+                            &nbsp;Settings</a>
+                    </li>
+
+                    <li class="under" style="margin-left:-10px;">
+                        <a class="head__open" [routerLink]="['/', 'corporate', 'notifications']"><i
+                                class="fa fa-bell"></i>&nbsp;
+                            My Notifications</a>
+                    </li>
+                    <div class="book-ride-div text-center row show-xs ">
+                        <a class="submit button book-ride-btn" [hidden]="isTrackingPage"
+                            [routerLink]="['/', 'corporate', 'live-tracking']">New Ride
+                            Request</a>
+                    </div>
+                </ul>
+            </div>
+        </nav>
+        <button class="head__menu navbar-toggler collapsed" type="button" id="clickhead">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="navbar navbar-dark hidden">
+            <a (click)="utilityService.closemenu()" id="backarrow" style="color:#fff; display: none;">&nbsp;<i
+                    class="fa fa-long-arrow-left"></i></a>
+            <button class="navbar-toggler collapsed" (click)="utilityService.openmenu()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+
+        <div id="mynav" class="mynavinfo" style="display:none;">
+            <div id="mynav" class="menuslide">
+                <ul class="mybar" id="head">
+                    <li class=" under" style=" display:none; margin-left:-10px;">
+                        <a class="" [routerLink]="['/', 'corporate', 'liveTracking']"
+                            (click)="utilityService.closemenu()"><img src="/assets/images/livemap.png">&nbsp; Live
+                            Map</a>
+                    </li>
+                    <li class="under" style="margin-left:-10px;">
+                        <a class="" [routerLink]="['/', 'corporate', 'trips']" (click)="utilityService.closemenu()"><img
+                                src="/assets/images/location1.png">&nbsp;Trips</a>
+                    </li>
+                    <li class="under dropdown" style="margin-left:-10px;">
+                        <a class="dropdown-toggle" href="javascript:;" (click)="utilityService.closemenu()"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                src="/assets/images/network.png">&nbsp; Network</a>
+                        <ul class="dropdown">
+                            <li> <a class="" [routerLink]="['/', 'corporate', 'myUsers']"
+                                    (click)="utilityService.closemenu()"><img src="/assets/images/network.png">&nbsp;
+                                    Users</a></li>
+                            <li> <a class="" [routerLink]="['/', 'corporate', 'myQudosfave']"
+                                    (click)="utilityService.closemenu()"><img src="/assets/images/network.png">&nbsp;
+                                    QudosFave</a></li>
+                        </ul>
+                    </li>
+                    <li class="under" style="margin-left:-10px;">
+                        <a class="" [routerLink]="['/', 'corporate', 'settings']"
+                            (click)="utilityService.closemenu()"><img
+                                src="/assets/images/settings.png">&nbsp;Settings</a>
+                    </li>
+                    <li class="under" style="margin-left:-10px;">
+                        <a class="" [routerLink]="['/', 'corporate', 'notifications']"
+                            (click)="utilityService.closemenu()"><i class="fa fa-bell"></i>&nbsp; My Notifications</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="book-ride-div text-center row hidden-xs">
+                <a class="submit button book-ride-btn" [hidden]="isTrackingPage"
+                    [routerLink]="['/', 'corporate', 'live-tracking']">New Ride
+                    Request</a>
+            </div>
+        </div>
+
+        <a href="javascript:;" [routerLink]="['/', 'corporate', 'live-tracking']" class="navbar-brand"><img
+                src="/assets/images/logo.png"></a>
+
+        <div id="mySidenav" class="sidenav">
+
+            <div class="slide" [hidden]="!(!editMode)" id="slide">
+                <span class="myprofile"><i class="fa fa-user-circle myprofileuser" aria-hidden="true"></i>&nbsp;&nbsp;
+                    My Profile
+                    <a (click)="utilityService.closeNav()" class="rclosebtn">&nbsp;<i
+                            class="fa fa-times"></i></a></span>
+                <hr class="myprofilehr">
+                <button class="btn-outline-primary btn-md editbtn desktopback" (click)="utilityService.closeNav()"
+                    style="display:none;"><i class="fa fa-long-arrow-left"></i>&nbsp; Back</button><br>
+
+                <img [src]="driverDetails?.driver_image || driverDetails?.image"
+                    onError="src= '/assets/images/default.png';" [(ngModel)]="usernewimage" id="dprofileimageone">
+                <p class="name">{{driverDetails.first_name}}<br><span style="font-size:14px;font-weight:400;">
+                        {{driverDetails.location}} </span></p>
+                <hr style="clear:left;">
+                <h4 class="ginfo">General Information</h4>
+                <p class="gpara"> <b>Name : </b> {{driverDetails.driver_name}}<br>
+                    <b>Business Name : </b>{{driverDetails.first_name}}<br>
+                    <b>Email : </b>{{driverDetails.driver_email}}<br>
+                    <b>Phone : </b>{{driverDetails.driver_mobile}}<br>
+                    <b>Address : </b> {{driverDetails.address}}
+                </p>
+                <hr>
+                <h4 class="ginfo">Other Information</h4>
+                <p class="gpara"> <b>Invite Code:</b> {{driverDetails.referral_code}}<br>
+                </p>
+                <button class="btn-outline-primary btn-md editbtn"
+                    style="font-weight: bold; color:#ffffff; background-color: #1f8dc6;padding:10px 37px;font-size: 16px;"
+                    (click)="editProfile()">Edit Details</button>
+            </div>
+
+            <div class="slide " [hidden]="!editMode" id="editinfo">
+                <span class="myprofile"><i class="fa fa-pencil-square-o myprofileuser"
+                        aria-hidden="true"></i>&nbsp;&nbsp; Edit Profile
+                    <a (click)="closeEdit()" class="rclosebtn">&nbsp;<i class="fa fa-times"></i></a></span>
+                <hr class="myprofilehr">
+                <button class="btn-outline-primary btn-md editbtn desktopback" (click)="closeEdit()"
+                    style="display:none;"><i class="fa fa-long-arrow-left"></i>&nbsp; Back</button><br>
+                <form method="post" (submit)="submitDetails()">
+
+                    <hr style="clear:left;">
+                    <p class="ginfo1">Edit general information</p>
+                    <div class="input-container">
+                        <i class="fa fa-map-marker icon"></i>
+                        <input class="input-field autocomplete" id="base_location" type="text" autocomplete="off"
+                            [(ngModel)]="pop.address" [ngModelOptions]="{standalone: true}" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm updatebtn" style="color:#fff;">Update</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="pos-f-t ml-auto">
+            <div class="navbar-collapse collapse" id="navbarResponsive">
+                <ul class="navbar-nav bar dropdown-pad" id="head">
+
+                    <li class="nav-item under hidden" style="display:none">
+                        <a class="" [routerLink]="['/', 'corporate', 'liveTracking']"><img
+                                src="/assets/images/livemap.png">&nbsp; Live
+                            Map</a>
+                    </li>
+
+                    <li class="nav-item under" *ngIf="showRideButton">
+                            <button style="font-size: 12px; margin: 2px 10px; padding: 5px 10px" href="javascript:;" (click)="onNewRide()" 
+                                            class=" animate-show btn btn-primary">
+                                            New Ride Request 
+                        </button>
+                    </li>
+
+                    <li class="nav-item under">
+                        <a class="" [routerLink]="['/', 'corporate', 'scheduled-trips']">
+                            <img src="/assets/images/navbar_trips.svg"> 
+                            <!-- <i class="fa fa-plane"></i> -->
+                            &nbsp;Trips </a>
+                    </li>
+
+
+                    <li class="nav-item under dropdown">
+                        <a class="dropdown-toggle" href="javascript:;" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <!-- <img src="/assets/images/network.png"> -->
+                            <i class="fa fa-users"></i>
+                            &nbsp; Network</a>
+                        <div class="dropdown-menu dropdown-menu-right user network-menu"
+                            aria-labelledby="navbarDropdown">
+                            <a class="drop-item-d" [routerLink]="['/' , 'corporate', 'myUsers']"><i
+                                    class="fa fa-user fa-fw"></i> &nbsp;
+                                Users</a>
+                            <hr class="rule">
+                            <a class="drop-item-d" [routerLink]="['/' , 'corporate', 'qudos-fave']"><i
+                                    class="fa fa-car fa-fw"></i>
+                                &nbsp; QudosFave</a>
+                        </div>
+                    </li>
+                    <li class="nav-item under">
+                        <a class="" [routerLink]="['/', 'corporate', 'listCards']">
+                            <!-- <img src="/assets/images/settings.png"> -->
+                            <i class="fa fa-cog"></i>
+                                <span class="ipad-hidden">&nbsp; Settings</span></a>
+                    </li>
+
+                    <li class="nav-item under">
+                        <a class="" [routerLink]="['/', 'corporate', 'notifications']"><i class="fa fa-exclamation-circle"><sup
+                                    [hidden]="!(totalNotifications>0)"
+                                    class="notif-badge">{{totalNotifications}}</sup></i><span class="ipad-hidden">&nbsp; Notifications</span></a>
+                    </li>
+
+                    <li class="nav-item under navbar-divider">
+                        <img src="assets/images/navbar_divider.svg">
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+
+        <!-- <div class="col-md-3 book-ride-div text-right row hidden-xs" *ngIf="!isTrackingPage">
+            <a class="submit button book-ride-btn"
+                [routerLink]="['/', 'corporate', 'live-tracking']">New
+                Ride Request</a>
+        </div> -->
+
+        <ul class="nav navbar-nav rlogout" style="padding-left: 0; margin-left: 0 !important; margin-right: 30px;">
+            <li class="nav-item dropdown row">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" id="download">
+                    <span class="uname"> {{driverDetails?.first_name}}</span>
+                </a>
+                <!-- <div class="dropdown-menu dropdown-menu-right user" aria-labelledby="download" >
+                    <a (click)="utilityService.openNav()"><i class="fa fa-user fa-fw"></i> My Profile</a>
+                    <hr class="rule">
+                    <a class="dropdown-item" data-toggle="modal" data-target="#confirmLogout"><i
+                            class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <a (click)="notifyMe()" class="dropdown-item hidden" style="display:none"><i
+                            class="fa fa-sign-out fa-fw"></i> utilityService.notifyMe</a>
+                </div> -->
+                <div class="dropdown-menu dropdown-menu-right user" aria-labelledby="download">
+                    <a *ngFor="let item of drivers">{{item.name}}</a>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#confirmLogout">
+                        Logout</a>
+                    <a (click)="notifyMe()" class="dropdown-item hidden" style="display:none"><i
+                            class="fa fa-sign-out fa-fw"></i>
+                        utilityService.notifyMe</a>
+                </div>
+            </li>
+            <img src="{{driverDetails.driver_image || driverDetails?.image}}" [(ngModel)]="usernewimage"
+                id="dprofileimagetwo" onError="src='/assets/images/default.png';" (click)="utilityService.openNav()">
+        </ul>
+
+    </div>
+</div>
+<!-- <div class="col-sm-1"></div> -->
+<div ui-view class="col-sm-12"></div>
+
+<div id="confirmLogout" class="modal" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-auto modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="mx-5 mt-5 mb-2 title">
+                Logout
+            </div>
+
+            <div class="modal-body p-0">
+                <!-- <button type="button" class="close" data-dismiss="modal"
+                    style="margin-top:-4px;font-size: 1.7em;margin-right: 4px;">&times;</button>
+                <div style="text-align: center">
+                    <h5 class="modal-title" style="margin-top: 40px;font-size: 20px; font-weight: 700;">You are logging
+                        out</h5>
+                    <p style="font-size:13px;margin-top: -10px;margin-bottom: 35px;">Are you sure you want to logout?
+                    </p>
+                </div>
+                <div style="text-align: center;margin-bottom: 45px;" class="logoutbtn">
+                    <button class="btn btn-primary login_button" data-dismiss="modal" (click)="logout()" type="submit"
+                        style="padding:7px 33px 7px 33px; margin-right:7px;">Log out</button>
+                </div> -->
+                <hr class="confirm mb-0">
+                <div class="message-bg">
+                    <div class="message p-5">
+                        Are you sure want to logout?
+                    </div>
+                </div>
+                <hr class="confirm mt-0">
+
+                <div align="center" class="m-3 mb-4">
+                    
+                    <button class="btn btn-primary btn-left m-2 px-3 py-1" data-dismiss="modal">
+                        Cancel
+                    </button>
+
+                    <button class="btn btn-secondary btn-right m-2 px-3 py-1" (click)="logout()">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="bookingConfirmed" class="modal" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-auto modal-dialog-centered">
+        <div class="modal-content shadow">
+
+            <div class="mx-5 mt-5 mb-2 title">
+                Booking
+            </div>
+
+            <div class="modal-body p-0">
+                <hr class="confirm mb-0">
+                <div class="message-bg">
+                    <div class="message p-5">
+                        Booking created successfully
+                    </div>
+                </div>
+                <hr class="confirm mt-0">
+                <div align="center" class="m-3 mb-4">
+                    <button class="btn btn-primary btn-left m-2 px-4 py-1" data-dismiss="modal" ui-sref="provider.booking.upcoming" type="submit">
+                        Ok
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="alertCredModal" class="modal" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-auto modal-dialog-centered">
+        <div class="modal-content shadow">
+            <div class="mx-5 mt-5 mb-2 title">
+                Session Expired!
+            </div>
+            <div class="modal-body p-0">
+                <hr class="confirm mb-0">
+                <div class="message-bg">
+                    <div class="message p-5">
+                        Your session has expired, you are being logged out.
+                    </div>
+                </div>
+                <hr class="confirm mt-0">
+                <div align="center" class="m-3 mb-4">
+                    <button class="btn btn-primary btn-left m-2 px-4 py-1" (click)="logoutClose()">
+                        Ok
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="confirmDiscard" class="modal" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-auto modal-dialog-centered">
+        <div class="modal-content shadow">
+            <div class="mx-5 mt-5 mb-2 title">
+                Cancel booking?
+            </div>
+
+            <!-- <div class="modal-body">
+                <h4 class="text-center" style="color:#383838">Going back would cancel the booking. Do you want to
+                    proceed ?</h4>
+                <button class="login_button" style="width: 25%;" data-dismiss="modal" (click)="discard();"
+                    type="submit">Yes</button>
+                <button class="login_button" style="width: 25%" data-dismiss="modal" (click)="dontDiscard();"
+                    type="submit">No</button>
+            </div> -->
+
+            <div class="modal-body p-0">
+                <hr class="confirm mb-0">
+                <div class="message-bg">
+                    <div class="message p-5">
+                        Going back would cancel the booking. Do you want to proceed ?
+                    </div>
+                </div>
+                <hr class="confirm mt-0">
+                 <div align="center" class="m-3 mb-4">
+                    <button class="btn btn-primary btn-left m-2 px-3 py-1" data-dismiss="modal" (click)="dontDiscard();">
+                        No
+                    </button>
+                    <button class="btn btn-secondary btn-right m-2 px-3 py-1" data-dismiss="modal" (click)="discard();">
+                        Yes
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="loading" class="modal" role="dialog">
+    <div class="modal-dialog">
+        <div
+            style="position: absolute;top: 50%;left: 50%;margin-top: 70px;margin-left: -50px;width: 100px;height: 100px;">
+            <img src="/assets/app-img/ring-alt.svg" />
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,87 @@
+td.cust {
+    word-break: break-word;
+    max-width: 216px;
+}
+b{
+    line-height: 2;
+}
+
+select.form-control.width-sm {
+    display: inline-block;
+    width: 12%;
+    -webkit-appearance: menulist;
+    margin-left: 2%;
+}
+::ng-deep .p-dropdown{
+     margin-left: 20px;
+}
+::ng-deep .p-dropdown .p-dropdown-label{
+    height:45px;
+    padding-top: 11px;
+    padding-left: 15px;
+}
+button.btn.transparent {
+    display: inline;
+    border: none;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+button.btn.transparent:hover,
+button.btn.transparent:active,
+button.btn.transparent:focus {
+    background: #fff !important;
+    border: none !important;
+}
+
+
+.btn-outline-primary.transparent:not(:disabled):not(.disabled).active,
+.btn-outline-primary.transparent:not(:disabled):not(.disabled):active,
+.show>.btn-outline-primary.transparent.dropdown-toggle {
+    background: #fff !important;
+    border: none !important;
+    color: transparent;
+}
+
+.btn.transparent.disabled,
+.btn.transparent:disabled {
+    opacity: 0.4;
+}
+
+
+.btn-outline-primary.active-page:not(:disabled):not(.disabled):active,
+.btn-outline-primary.active-page {
+    color: #fff !important;
+}
+
+a.tripsbtn,
+a.tripsbtn:focus,
+a.tripsbtn:hover,
+a.tripsbtn:active {
+    color: #565353 !important;
+}
+
+a.tripsbtn.exportBtn,
+a.tripsbtn.exportBtn:focus,
+a.tripsbtn.exportBtn:hover,
+a.tripsbtn.exportBtn:active {
+    color: #fff !important;
+}
+
+a.tripsbtn.active-page {
+    color: #fff !important;
+}
+
+#Trips a.tripsbtn:not(.active-page):hover {
+    color: #fff !important;
+    background: #222e46 !important;
+}
+.tripsbtn{
+    font-weight: 600;
+}
+.selectContainer{
+    height:46px;
+}
+.table thead th {
+    cursor: default !important;
+}
